@@ -1,0 +1,626 @@
+[
+  {
+    "id": 1,
+    "species": "Lion",
+    "habitat": "Savanna",
+    "arrival_date": "2021-03-12"
+  },
+  {
+    "id": 2,
+    "species": "Lion",
+    "habitat": "Savanna",
+    "arrival_date": "2022-05-18"
+  },
+  {
+    "id": 3,
+    "species": "Lion",
+    "habitat": "Savanna",
+    "arrival_date": "2020-11-02"
+  },
+  {
+    "id": 4,
+    "species": "Elephant",
+    "habitat": "Savanna",
+    "arrival_date": "2023-07-09"
+  },
+  {
+    "id": 5,
+    "species": "Elephant",
+    "habitat": "Savanna",
+    "arrival_date": "2022-04-27"
+  },
+  {
+    "id": 6,
+    "species": "Elephant",
+    "habitat": "Savanna",
+    "arrival_date": "2021-12-15"
+  },
+  {
+    "id": 7,
+    "species": "Giraffe",
+    "habitat": "Savanna",
+    "arrival_date": "2020-09-21"
+  },
+  {
+    "id": 8,
+    "species": "Giraffe",
+    "habitat": "Savanna",
+    "arrival_date": "2023-01-10"
+  },
+  {
+    "id": 9,
+    "species": "Giraffe",
+    "habitat": "Savanna",
+    "arrival_date": "2024-02-05"
+  },
+  {
+    "id": 10,
+    "species": "Cheetah",
+    "habitat": "Savanna",
+    "arrival_date": "2021-06-03"
+  },
+  {
+    "id": 11,
+    "species": "Zebra",
+    "habitat": "Savanna",
+    "arrival_date": "2020-04-12"
+  },
+  {
+    "id": 12,
+    "species": "Zebra",
+    "habitat": "Savanna",
+    "arrival_date": "2022-09-08"
+  },
+  {
+    "id": 13,
+    "species": "Zebra",
+    "habitat": "Savanna",
+    "arrival_date": "2023-03-17"
+  },
+  {
+    "id": 14,
+    "species": "Hyena",
+    "habitat": "Savanna",
+    "arrival_date": "2021-07-24"
+  },
+  {
+    "id": 15,
+    "species": "Hyena",
+    "habitat": "Savanna",
+    "arrival_date": "2022-11-19"
+  },
+  {
+    "id": 16,
+    "species": "Hyena",
+    "habitat": "Savanna",
+    "arrival_date": "2020-01-13"
+  },
+  {
+    "id": 17,
+    "species": "Wolf",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2023-02-16"
+  },
+  {
+    "id": 18,
+    "species": "Wolf",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2021-09-30"
+  },
+  {
+    "id": 19,
+    "species": "Wolf",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2022-12-01"
+  },
+  {
+    "id": 20,
+    "species": "Fox",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2020-08-05"
+  },
+  {
+    "id": 21,
+    "species": "Fox",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2023-05-22"
+  },
+  {
+    "id": 22,
+    "species": "Fox",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2024-01-28"
+  },
+  {
+    "id": 23,
+    "species": "Bear",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2021-10-11"
+  },
+  {
+    "id": 24,
+    "species": "Bear",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2022-03-02"
+  },
+  {
+    "id": 25,
+    "species": "Bear",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2023-06-14"
+  },
+  {
+    "id": 26,
+    "species": "Deer",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2020-12-09"
+  },
+  {
+    "id": 27,
+    "species": "Deer",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2022-07-18"
+  },
+  {
+    "id": 28,
+    "species": "Deer",
+    "habitat": "Temperate Forest",
+    "arrival_date": "2024-03-29"
+  },
+  {
+    "id": 29,
+    "species": "Rabbit",
+    "habitat": "Grassland",
+    "arrival_date": "2023-04-03"
+  },
+  {
+    "id": 30,
+    "species": "Rabbit",
+    "habitat": "Grassland",
+    "arrival_date": "2021-02-26"
+  },
+  {
+    "id": 31,
+    "species": "Rabbit",
+    "habitat": "Grassland",
+    "arrival_date": "2020-10-30"
+  },
+  {
+    "id": 32,
+    "species": "Kangaroo",
+    "habitat": "Grassland",
+    "arrival_date": "2022-08-12"
+  },
+  {
+    "id": 33,
+    "species": "Kangaroo",
+    "habitat": "Grassland",
+    "arrival_date": "2023-11-05"
+  },
+  {
+    "id": 34,
+    "species": "Kangaroo",
+    "habitat": "Grassland",
+    "arrival_date": "2021-04-22"
+  },
+  {
+    "id": 35,
+    "species": "Bison",
+    "habitat": "Grassland",
+    "arrival_date": "2020-06-14"
+  },
+  {
+    "id": 36,
+    "species": "Bison",
+    "habitat": "Grassland",
+    "arrival_date": "2022-01-19"
+  },
+  {
+    "id": 37,
+    "species": "Bison",
+    "habitat": "Grassland",
+    "arrival_date": "2023-08-07"
+  },
+  {
+    "id": 38,
+    "species": "Eagle",
+    "habitat": "Mountains",
+    "arrival_date": "2020-03-25"
+  },
+  {
+    "id": 39,
+    "species": "Eagle",
+    "habitat": "Mountains",
+    "arrival_date": "2021-07-11"
+  },
+  {
+    "id": 40,
+    "species": "Eagle",
+    "habitat": "Mountains",
+    "arrival_date": "2023-09-03"
+  },
+  {
+    "id": 41,
+    "species": "Goat",
+    "habitat": "Mountains",
+    "arrival_date": "2022-05-14"
+  },
+  {
+    "id": 42,
+    "species": "Goat",
+    "habitat": "Mountains",
+    "arrival_date": "2021-03-08"
+  },
+  {
+    "id": 43,
+    "species": "Goat",
+    "habitat": "Mountains",
+    "arrival_date": "2024-02-11"
+  },
+  {
+    "id": 44,
+    "species": "Sheep",
+    "habitat": "Grassland",
+    "arrival_date": "2020-11-07"
+  },
+  {
+    "id": 45,
+    "species": "Sheep",
+    "habitat": "Grassland",
+    "arrival_date": "2022-02-21"
+  },
+  {
+    "id": 46,
+    "species": "Sheep",
+    "habitat": "Grassland",
+    "arrival_date": "2023-06-27"
+  },
+  {
+    "id": 47,
+    "species": "Cow",
+    "habitat": "Farms",
+    "arrival_date": "2021-01-18"
+  },
+  {
+    "id": 48,
+    "species": "Cow",
+    "habitat": "Farms",
+    "arrival_date": "2023-10-04"
+  },
+  {
+    "id": 49,
+    "species": "Cow",
+    "habitat": "Farms",
+    "arrival_date": "2022-05-16"
+  },
+  {
+    "id": 50,
+    "species": "Pig",
+    "habitat": "Farms",
+    "arrival_date": "2020-09-02"
+  },
+  {
+    "id": 51,
+    "species": "Pig",
+    "habitat": "Farms",
+    "arrival_date": "2022-11-25"
+  },
+  {
+    "id": 52,
+    "species": "Pig",
+    "habitat": "Farms",
+    "arrival_date": "2023-03-12"
+  },
+  {
+    "id": 53,
+    "species": "Horse",
+    "habitat": "Grassland",
+    "arrival_date": "2021-08-29"
+  },
+  {
+    "id": 54,
+    "species": "Horse",
+    "habitat": "Grassland",
+    "arrival_date": "2023-04-19"
+  },
+  {
+    "id": 55,
+    "species": "Horse",
+    "habitat": "Grassland",
+    "arrival_date": "2022-06-23"
+  },
+  {
+    "id": 56,
+    "species": "Dog",
+    "habitat": "Urban",
+    "arrival_date": "2020-05-15"
+  },
+  {
+    "id": 57,
+    "species": "Dog",
+    "habitat": "Urban",
+    "arrival_date": "2021-11-30"
+  },
+  {
+    "id": 58,
+    "species": "Dog",
+    "habitat": "Urban",
+    "arrival_date": "2023-07-08"
+  },
+  {
+    "id": 59,
+    "species": "Cat",
+    "habitat": "Urban",
+    "arrival_date": "2022-03-14"
+  },
+  {
+    "id": 60,
+    "species": "Cat",
+    "habitat": "Urban",
+    "arrival_date": "2020-12-22"
+  },
+  {
+    "id": 61,
+    "species": "Cat",
+    "habitat": "Urban",
+    "arrival_date": "2023-09-17"
+  },
+  {
+    "id": 62,
+    "species": "Pigeon",
+    "habitat": "Urban",
+    "arrival_date": "2021-04-10"
+  },
+  {
+    "id": 63,
+    "species": "Pigeon",
+    "habitat": "Urban",
+    "arrival_date": "2022-01-31"
+  },
+  {
+    "id": 64,
+    "species": "Pigeon",
+    "habitat": "Urban",
+    "arrival_date": "2023-05-29"
+  },
+  {
+    "id": 65,
+    "species": "Crow",
+    "habitat": "Urban",
+    "arrival_date": "2020-08-18"
+  },
+  {
+    "id": 66,
+    "species": "Crow",
+    "habitat": "Urban",
+    "arrival_date": "2022-06-06"
+  },
+  {
+    "id": 67,
+    "species": "Crow",
+    "habitat": "Urban",
+    "arrival_date": "2024-01-13"
+  },
+  {
+    "id": 68,
+    "species": "Owl",
+    "habitat": "Forest",
+    "arrival_date": "2021-09-09"
+  },
+  {
+    "id": 69,
+    "species": "Owl",
+    "habitat": "Forest",
+    "arrival_date": "2023-02-24"
+  },
+  {
+    "id": 70,
+    "species": "Owl",
+    "habitat": "Forest",
+    "arrival_date": "2020-11-18"
+  },
+  {
+    "id": 71,
+    "species": "Squirrel",
+    "habitat": "Forest",
+    "arrival_date": "2022-10-12"
+  },
+  {
+    "id": 72,
+    "species": "Squirrel",
+    "habitat": "Forest",
+    "arrival_date": "2021-06-04"
+  },
+  {
+    "id": 73,
+    "species": "Squirrel",
+    "habitat": "Forest",
+    "arrival_date": "2023-08-22"
+  },
+  {
+    "id": 74,
+    "species": "Raccoon",
+    "habitat": "Forest",
+    "arrival_date": "2020-07-27"
+  },
+  {
+    "id": 75,
+    "species": "Raccoon",
+    "habitat": "Forest",
+    "arrival_date": "2022-03-05"
+  },
+  {
+    "id": 76,
+    "species": "Raccoon",
+    "habitat": "Forest",
+    "arrival_date": "2024-02-16"
+  },
+  {
+    "id": 77,
+    "species": "Frog",
+    "habitat": "Wetlands",
+    "arrival_date": "2021-05-06"
+  },
+  {
+    "id": 78,
+    "species": "Frog",
+    "habitat": "Wetlands",
+    "arrival_date": "2022-07-12"
+  },
+  {
+    "id": 79,
+    "species": "Frog",
+    "habitat": "Wetlands",
+    "arrival_date": "2023-10-21"
+  },
+  {
+    "id": 80,
+    "species": "Snake",
+    "habitat": "Desert",
+    "arrival_date": "2020-03-14"
+  },
+  {
+    "id": 81,
+    "species": "Snake",
+    "habitat": "Desert",
+    "arrival_date": "2022-09-01"
+  },
+  {
+    "id": 82,
+    "species": "Snake",
+    "habitat": "Desert",
+    "arrival_date": "2023-11-11"
+  },
+  {
+    "id": 83,
+    "species": "Camel",
+    "habitat": "Desert",
+    "arrival_date": "2021-01-07"
+  },
+  {
+    "id": 84,
+    "species": "Camel",
+    "habitat": "Desert",
+    "arrival_date": "2022-10-15"
+  },
+  {
+    "id": 85,
+    "species": "Camel",
+    "habitat": "Desert",
+    "arrival_date": "2023-04-28"
+  },
+  {
+    "id": 86,
+    "species": "Penguin",
+    "habitat": "Antarctic",
+    "arrival_date": "2020-12-01"
+  },
+  {
+    "id": 87,
+    "species": "Penguin",
+    "habitat": "Antarctic",
+    "arrival_date": "2022-02-11"
+  },
+  {
+    "id": 88,
+    "species": "Penguin",
+    "habitat": "Antarctic",
+    "arrival_date": "2023-01-30"
+  },
+  {
+    "id": 89,
+    "species": "Seal",
+    "habitat": "Arctic Coast",
+    "arrival_date": "2021-03-04"
+  },
+  {
+    "id": 90,
+    "species": "Seal",
+    "habitat": "Arctic Coast",
+    "arrival_date": "2023-06-16"
+  },
+  {
+    "id": 91,
+    "species": "Seal",
+    "habitat": "Arctic Coast",
+    "arrival_date": "2022-04-25"
+  },
+  {
+    "id": 92,
+    "species": "Walrus",
+    "habitat": "Arctic",
+    "arrival_date": "2020-05-20"
+  },
+  {
+    "id": 93,
+    "species": "Walrus",
+    "habitat": "Arctic",
+    "arrival_date": "2021-09-28"
+  },
+  {
+    "id": 94,
+    "species": "Walrus",
+    "habitat": "Arctic",
+    "arrival_date": "2023-02-07"
+  },
+  {
+    "id": 95,
+    "species": "Dolphin",
+    "habitat": "Ocean",
+    "arrival_date": "2021-07-01"
+  },
+  {
+    "id": 96,
+    "species": "Dolphin",
+    "habitat": "Ocean",
+    "arrival_date": "2022-08-13"
+  },
+  {
+    "id": 97,
+    "species": "Dolphin",
+    "habitat": "Ocean",
+    "arrival_date": "2024-04-02"
+  },
+  {
+    "id": 98,
+    "species": "Shark",
+    "habitat": "Ocean",
+    "arrival_date": "2020-06-09"
+  },
+  {
+    "id": 99,
+    "species": "Shark",
+    "habitat": "Ocean",
+    "arrival_date": "2021-10-26"
+  },
+  {
+    "id": 100,
+    "species": "Shark",
+    "habitat": "Ocean",
+    "arrival_date": "2023-12-18"
+  },
+  {
+    "id": 46456,
+    "species": "macska",
+    "habitat": "h\u00E1z",
+    "arrival_date": "2025-11-14"
+  },
+  {
+    "id": 333,
+    "species": "asdas",
+    "habitat": "asdasd",
+    "arrival_date": "2025-10-07"
+  },
+  {
+    "id": 234,
+    "species": "sdaa",
+    "habitat": "dasda",
+    "arrival_date": "2025-11-05"
+  },
+  {
+    "id": 123,
+    "species": "asd",
+    "habitat": "asd",
+    "arrival_date": "2025-11-12"
+  }
+]
