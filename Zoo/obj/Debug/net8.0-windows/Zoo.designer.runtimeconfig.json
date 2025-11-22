@@ -12,12 +12,11 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\farkas.adam.attila\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\farkas.adam.attila\\.nuget\\packages",
+      "C:\\Users\\Farkas Ádám\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Farkas Ádám\\.nuget\\packages",
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
     ],
     "configProperties": {
-      "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,
       "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false,
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
     }

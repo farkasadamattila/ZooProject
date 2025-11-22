@@ -26,54 +26,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header: logo left, title center, clock right -->
-        <Grid Grid.Row="0" Margin="20,10,20,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <!-- Logo (simple emoji/text logo for now) -->
-            <Viewbox Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center">
-                <TextBlock Text="🐾" FontSize="28" />
-            </Viewbox>
-
-            <!-- Title -->
-            <TextBlock Grid.Column="1" Text="Zoo Manager" FontSize="28" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-            <!-- Clock -->
-            <TextBlock x:Name="ClockTextBlock" Grid.Column="2" FontSize="16" FontWeight="SemiBold" Foreground="#333" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        </Grid>
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Margin="20,10,20,10">
+            <TextBlock Text="Zoo Manager" FontSize="28" FontWeight="Bold" Foreground="#333" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <Button Content="🌐 Language" Width="120" Height="32" DockPanel.Dock="Right" VerticalAlignment="Center" Background="#E0E0E0" Foreground="#333" BorderBrush="#CCC" Click="Button_Click"/>
+        </DockPanel>
 
         <!-- Main Content -->
         <Border Grid.Row="1" Margin="20" Padding="20" Background="White" CornerRadius="12" BorderBrush="#DDD" BorderThickness="1">
             <StackPanel>
                 <TextBlock Text="Add New Animal" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,16" Foreground="#444"/>
-
-                <!-- Responsive form: grid with two columns that will stretch -->
-                <Grid Margin="0,0,0,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,12">
+                <UniformGrid Columns="2" Rows="2" Margin="0,0,0,12" HorizontalAlignment="Stretch">
+                    <StackPanel Margin="0,0,12,0">
                         <TextBlock Text="ID" FontWeight="Bold"/>
                         <TextBox x:Name="IdTextBox" Height="28" Margin="0,4,0,0"/>
                     </StackPanel>
-
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12">
+                    <StackPanel>
                         <TextBlock Text="Name (Species)" FontWeight="Bold"/>
                         <TextBox x:Name="NameTextBox" Height="28" Margin="0,4,0,0"/>
                     </StackPanel>
-
-                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,12,0">
+                    <StackPanel Margin="0,0,12,0">
                         <TextBlock Text="Habitat" FontWeight="Bold"/>
                         <ComboBox x:Name="HabitatComboBox" Height="28" Margin="0,4,0,0">
                             <ComboBoxItem Content="Savannah"/>
@@ -85,15 +57,17 @@
                             <ComboBoxItem Content="Arctic"/>
                         </ComboBox>
                     </StackPanel>
-
-                    <StackPanel Grid.Row="1" Grid.Column="1">
+                    <StackPanel>
                         <TextBlock Text="Arrival Date" FontWeight="Bold"/>
                         <DatePicker x:Name="ArrivalDatePicker" Height="28" Margin="0,4,0,0"/>
                     </StackPanel>
-                </Grid>
-
+                </UniformGrid>
                 <Button x:Name="AddAnimalButton" Content="Add Animal" Height="32" Width="140" HorizontalAlignment="Left" Background="#4CAF50" Foreground="White" BorderBrush="#388E3C" FontWeight="Bold" Click="AddAnimalButton_Click"/>
                 <Separator Margin="0,20,0,20"/>
+                <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button x:Name="ShowListButton" Content="Show List" Width="100" Height="32" Background="#2196F3" Foreground="White" BorderBrush="#1976D2" FontWeight="Bold" Click="ShowListButton_Click" Margin="0,0,10,0"/>
+                    <Button x:Name="ShowLabelsButton" Content="Show Labels" Width="100" Height="32" Background="#FF9800" Foreground="White" BorderBrush="#F57C00" FontWeight="Bold" Click="ShowLabelsButton_Click"/>
+                </StackPanel>-->
                 <ContentControl x:Name="DataDisplay" Margin="0,20,0,0"/>
             </StackPanel>
         </Border>

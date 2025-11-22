@@ -4,7 +4,6 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System;
-using System.Windows.Threading;
 
 namespace Zoo
 {
@@ -12,44 +11,17 @@ namespace Zoo
     {
         private List<Animal> animals = new List<Animal>();
         private const string JsonPath = "animals.json";
-        private readonly DispatcherTimer _clockTimer;
 
         public MainWindow()
         {
             InitializeComponent();
-            // Initialize clock
-            _clockTimer = new DispatcherTimer(DispatcherPriority.Background);
-            _clockTimer.Interval = TimeSpan.FromSeconds(1);
-            _clockTimer.Tick += ClockTimer_Tick;
-            _clockTimer.Start();
-
             LoadAnimals();
-        }
-
-        private void ClockTimer_Tick(object? sender, EventArgs e)
-        {
-            if (ClockTextBlock != null)
-            {
-                ClockTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
-            }
         }
 
         private void LoadAnimals()
         {
-            if (!File.Exists(JsonPath))
-            {
-                animals = new List<Animal>();
-                return;
-            }
-
-            string json = File.ReadAllText(JsonPath);
-            if (string.IsNullOrWhiteSpace(json))
-            {
-                animals = new List<Animal>();
-                return;
-            }
-
-            animals = JsonSerializer.Deserialize<List<Animal>>(json) ?? new List<Animal>();
+                string json = File.ReadAllText(JsonPath);
+                animals = JsonSerializer.Deserialize<List<Animal>>(json);
         }
 
         private void SaveAnimals()
@@ -73,7 +45,7 @@ namespace Zoo
                     arrival_date = ArrivalDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd")
                 });
                 SaveAnimals();
-
+                
                 MessageBox.Show("Animal added.", "Success");
                 IdTextBox.Text = "";
                 NameTextBox.Text = "";
@@ -82,7 +54,7 @@ namespace Zoo
             }
             else
             {
-                MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("TÖLTSD KI HELYESEN TE KIS GECI, NEHOGY KIHAGYJ BÁRMIT IS", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

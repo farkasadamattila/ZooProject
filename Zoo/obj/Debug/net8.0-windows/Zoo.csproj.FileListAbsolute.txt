@@ -20,3 +20,25 @@ Z:\ZooProject\Zoo\obj\Debug\net8.0-windows\refint\Zoo.dll
 Z:\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.pdb
 Z:\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.genruntimeconfig.cache
 Z:\ZooProject\Zoo\obj\Debug\net8.0-windows\ref\Zoo.dll
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\animals.json
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\Zoo.exe
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\Zoo.deps.json
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\Zoo.runtimeconfig.json
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\Zoo.dll
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\bin\Debug\net8.0-windows\Zoo.pdb
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo_MarkupCompile.cache
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo_MarkupCompile.lref
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.g.resources
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.AssemblyInfoInputs.cache
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.AssemblyInfo.cs
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.csproj.CoreCompileInputs.cache
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.sourcelink.json
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.dll
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\refint\Zoo.dll
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.pdb
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\Zoo.genruntimeconfig.cache
+C:\Users\Farkas Ádám\Downloads\ZooProject\Zoo\obj\Debug\net8.0-windows\ref\Zoo.dll
