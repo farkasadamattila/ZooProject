@@ -1,1 +1,1 @@
-TODO/Elvégezendő feladatok:
+TODO:
