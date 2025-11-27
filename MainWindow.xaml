@@ -218,32 +218,58 @@
                             </Grid.ColumnDefinitions>
                             
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Search Criteria" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12" FontFamily="Segoe UI"/>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16" FlowDirection="LeftToRight">
-                                    <RadioButton x:Name="SearchByIdRadio" Content="ID" GroupName="SearchType" Margin="0,0,20,0" IsChecked="True" Checked="SearchRadio_Checked" FontWeight="Medium"/>
-                                    <RadioButton x:Name="SearchBySpeciesRadio" Content="Species" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
-                                    <RadioButton x:Name="SearchByHabitatRadio" Content="Habitat" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                    <RadioButton x:Name="SearchByHealthRadio" Content="Health Status" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
-                                    <RadioButton x:Name="SearchByFedRadio" Content="Fed Status" GroupName="SearchType" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                <TextBlock Text="Search Criteria" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,16"/>
+                                
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                                        <RadioButton x:Name="SearchByIdRadio" Content="ID" GroupName="SearchType" Margin="0,0,24,0" IsChecked="True" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                        <RadioButton x:Name="SearchBySpeciesRadio" Content="Species" GroupName="SearchType" Margin="0,0,24,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                        <RadioButton x:Name="SearchByHabitatRadio" Content="Habitat" GroupName="SearchType" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                        <RadioButton x:Name="SearchByHealthRadio" Content="Health Status" GroupName="SearchType" Margin="0,0,24,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                        <RadioButton x:Name="SearchByFedRadio" Content="Fed Status" GroupName="SearchType" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                    </StackPanel>
+                                </Grid>
+                                
+                                <StackPanel>
+                                    <TextBox x:Name="SearchTextBox" Height="34" Margin="0,0,0,20" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1" TextChanged="SearchTextBox_TextChanged"/>
+                                    <ComboBox x:Name="SearchComboBox" Height="34" Visibility="Collapsed" Margin="0,0,0,20" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1" SelectionChanged="SearchComboBox_SelectionChanged"/>
+                                    <CheckBox x:Name="SearchFedCheckBox" Content="Show only fed animals" Height="34" Visibility="Collapsed" VerticalContentAlignment="Center" FontWeight="Medium" Margin="0,0,0,20" Checked="SearchFedCheckBox_Changed" Unchecked="SearchFedCheckBox_Changed"/>
                                 </StackPanel>
                                 
-                                <StackPanel x:Name="SearchInputPanel">
-                                    <TextBox x:Name="SearchTextBox" Height="34" Margin="0,0,0,16" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1" TextChanged="SearchTextBox_TextChanged"/>
-                                    <ComboBox x:Name="SearchComboBox" Height="34" Visibility="Collapsed" Margin="0,0,0,16" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1" SelectionChanged="SearchComboBox_SelectionChanged"/>
-                                    <CheckBox x:Name="SearchFedCheckBox" Content="Show only fed animals" Height="34" Visibility="Collapsed" VerticalContentAlignment="Center" FontWeight="Medium" Margin="0,0,0,16" Checked="SearchFedCheckBox_Changed" Unchecked="SearchFedCheckBox_Changed"/>
-                                </StackPanel>
+                                <Grid Margin="0,0,0,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <TextBlock Grid.Column="0" Text="Sort by:" FontWeight="SemiBold" Foreground="#424242" FontSize="13" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                    <ComboBox x:Name="SortComboBox" Grid.Column="1" Height="34" SelectionChanged="SortComboBox_SelectionChanged" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1" VerticalContentAlignment="Center" Margin="0,0,8,0">
+                                        <ComboBoxItem Content="ID" IsSelected="True"/>
+                                        <ComboBoxItem Content="Species"/>
+                                        <ComboBoxItem Content="Habitat"/>
+                                        <ComboBoxItem Content="Arrival Date"/>
+                                    </ComboBox>
+                                    <Button x:Name="SortOrderButton" Grid.Column="2" Content="⬆" Height="34" Width="50" Background="#607D8B" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="SortOrderButton_Click" ToolTip="Toggle sort order"/>
+                                </Grid>
                                 
-                                <TextBlock Text="Search Results" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,4,0,12" FontFamily="Segoe UI"/>
-                                <ListBox x:Name="SearchResultsListBox" Height="200" ItemTemplate="{StaticResource AnimalListTemplate}" SelectionChanged="SearchResultsListBox_SelectionChanged" BorderBrush="#E0E0E0" BorderThickness="1"/>
+                                <TextBlock Text="Search Results" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12"/>
+                                <ListBox x:Name="SearchResultsListBox" Height="310" ItemTemplate="{StaticResource AnimalListTemplate}" SelectionChanged="SearchResultsListBox_SelectionChanged" BorderBrush="#E0E0E0" BorderThickness="1"/>
                             </StackPanel>
                             
                             <Border Grid.Column="1" Background="#E0E0E0" Width="1" Margin="0,8"/>
                             
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Modify Selected Animal" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12" FontFamily="Segoe UI"/>
-                                <TextBlock Text="Select an animal from search results to modify" FontStyle="Italic" Foreground="#757575" FontSize="12" Margin="0,0,0,16" FontFamily="Segoe UI"/>
+                                <TextBlock Text="Modify Selected Animal" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12"/>
+                                <TextBlock Text="Select an animal from search results to modify" FontStyle="Italic" Foreground="#757575" FontSize="12" Margin="0,0,0,16"/>
                                 
                                 <Grid x:Name="ModifyGrid" IsEnabled="False">
                                     <Grid.RowDefinitions>
@@ -256,17 +282,17 @@
                                     </Grid.RowDefinitions>
 
                                     <StackPanel Grid.Row="0" Margin="0,0,0,12">
-                                        <TextBlock Text="ID (Read-only)" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="ID (Read-only)" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <TextBox x:Name="ModifyIdTextBox" Height="34" Margin="0,6,0,0" IsReadOnly="True" Background="#F5F5F5" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="1" Margin="0,0,0,12">
-                                        <TextBlock Text="Name (Species)" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="Name (Species)" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <TextBox x:Name="ModifyNameTextBox" Height="34" Margin="0,6,0,0" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Margin="0,0,0,12">
-                                        <TextBlock Text="Habitat" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="Habitat" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <ComboBox x:Name="ModifyHabitatComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
                                             <ComboBoxItem Content="Savannah"/>
                                             <ComboBoxItem Content="Rainforest"/>
@@ -279,12 +305,12 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="3" Margin="0,0,0,12">
-                                        <TextBlock Text="Arrival Date" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="Arrival Date" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <DatePicker x:Name="ModifyArrivalDatePicker" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="4" Margin="0,0,0,12">
-                                        <TextBlock Text="Health Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="Health Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <ComboBox x:Name="ModifyHealthStatusComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
                                             <ComboBoxItem Content="Excellent"/>
                                             <ComboBoxItem Content="Good"/>
@@ -294,7 +320,7 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="5" Margin="0,0,0,16">
-                                        <TextBlock Text="Feeding Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBlock Text="Feeding Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13"/>
                                         <CheckBox x:Name="ModifyIsFedCheckBox" Content="Is Fed" Height="34" Margin="0,10,0,0" VerticalContentAlignment="Center" FontWeight="Medium"/>
                                     </StackPanel>
                                 </Grid>
@@ -308,7 +334,7 @@
                     </Border>
                 </Expander>
 
-                <Expander Header="📋 View All Animals" FontSize="17" FontWeight="Bold" IsExpanded="True" Margin="0,0,0,16">
+                <Expander Header="💾 Export Data" FontSize="17" FontWeight="Bold" IsExpanded="False" Margin="0,0,0,16">
                     <Expander.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" Foreground="#2E7D32" FontSize="17" FontWeight="Bold" FontFamily="Segoe UI"/>
@@ -319,19 +345,13 @@
                             <DropShadowEffect Color="#000000" Opacity="0.08" BlurRadius="10" ShadowDepth="2"/>
                         </Border.Effect>
                         <StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
-                                <Button x:Name="ShowListButton" Content="Show as List" Height="38" Width="130" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ShowListButton_Click" Margin="0,0,12,0"/>
-                                <Button x:Name="ShowLabelsButton" Content="Show as Labels" Height="38" Width="130" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ShowLabelsButton_Click" Margin="0,0,12,0"/>
-                                <Button x:Name="ExportButton" Content="Export to JSON" Height="38" Width="140" Background="#FF9800" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ExportButton_Click" Margin="0,0,12,0"/>
-                                <ComboBox x:Name="SortComboBox" Width="160" Height="38" SelectionChanged="SortComboBox_SelectionChanged" Padding="10,8" BorderBrush="#BDBDBD" BorderThickness="1" VerticalContentAlignment="Center">
-                                    <ComboBoxItem Content="Sort by ID" IsSelected="True"/>
-                                    <ComboBoxItem Content="Sort by Species"/>
-                                    <ComboBoxItem Content="Sort by Habitat"/>
-                                    <ComboBoxItem Content="Sort by Arrival Date"/>
-                                </ComboBox>
-                            </StackPanel>
+                            <TextBlock Text="Export Options" FontWeight="SemiBold" Foreground="#424242" FontSize="14" Margin="0,0,0,16"/>
                             
-                            <ContentControl x:Name="DataDisplay" MinHeight="220"/>
+                            <RadioButton x:Name="ExportAllRadio" Content="Export all animals" GroupName="ExportType" IsChecked="True" Margin="0,0,0,16" FontWeight="Medium"/>
+                            <RadioButton x:Name="ExportSearchRadio" Content="Export current search results" GroupName="ExportType" Margin="0,0,0,24" FontWeight="Medium"/>
+                            
+
+                            <Button x:Name="ExportButton" Content="📥 Export to JSON" Height="42" Background="#FF9800" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ExportButton_Click" HorizontalAlignment="Left" Width="200"/>
                         </StackPanel>
                     </Border>
                 </Expander>

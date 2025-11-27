@@ -12,47 +12,46 @@ namespace Zoo
 {
     public partial class MainWindow : Window
     {
-        private List<Animal> animals = new List<Animal>();
+        private List<Animal> animals;
         private const string JsonPath = "animals.json";
-        private readonly DispatcherTimer _clockTimer;
-        private Animal? selectedAnimal = null;
+        private DispatcherTimer clockTimer;
+        private Animal selectedAnimal;
+        private bool isAscending;
 
         public MainWindow()
         {
             InitializeComponent();
-            _clockTimer = new DispatcherTimer(DispatcherPriority.Background);
-            _clockTimer.Interval = TimeSpan.FromSeconds(1);
-            _clockTimer.Tick += ClockTimer_Tick;
-            _clockTimer.Start();
-
+            animals = new List<Animal>();
+            isAscending = true;
+            
+            InitializeClock();
             LoadAnimals();
-            this.Loaded += (s, e) => RefreshDisplay();
+            
+            this.Loaded += (s, e) => UpdateSearchResults();
         }
 
-        private void ClockTimer_Tick(object? sender, EventArgs e)
+        private void InitializeClock()
         {
-            if (ClockTextBlock != null)
+            clockTimer = new DispatcherTimer(DispatcherPriority.Background)
             {
-                ClockTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
-            }
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            clockTimer.Tick += (s, e) => 
+            {
+                if (ClockTextBlock != null)
+                    ClockTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+            };
+            clockTimer.Start();
         }
 
         private void LoadAnimals()
         {
             if (!File.Exists(JsonPath))
-            {
-                animals = new List<Animal>();
                 return;
-            }
 
             string json = File.ReadAllText(JsonPath);
-            if (string.IsNullOrWhiteSpace(json))
-            {
-                animals = new List<Animal>();
-                return;
-            }
-
-            animals = JsonSerializer.Deserialize<List<Animal>>(json) ?? new List<Animal>();
+            if (!string.IsNullOrWhiteSpace(json))
+                animals = JsonSerializer.Deserialize<List<Animal>>(json) ?? new List<Animal>();
         }
 
         private void SaveAnimals()
@@ -63,104 +62,63 @@ namespace Zoo
 
         private void AddAnimalButton_Click(object sender, RoutedEventArgs e)
         {
-            if (int.TryParse(IdTextBox.Text, out int id) &&
-                !string.IsNullOrEmpty(NameTextBox.Text) &&
-                HabitatComboBox.SelectedItem is ComboBoxItem selectedHabitat &&
-                HealthStatusComboBox.SelectedItem is ComboBoxItem selectedHealth &&
-                ArrivalDatePicker.SelectedDate != null)
-            {
-                if (animals.Any(a => a.id == id))
-                {
-                    MessageBox.Show("An animal with this ID already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                animals.Add(new Animal
-                {
-                    id = id,
-                    species = NameTextBox.Text,
-                    habitat = selectedHabitat.Content.ToString(),
-                    arrival_date = ArrivalDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd"),
-                    health_status = selectedHealth.Content.ToString(),
-                    is_fed = IsFedCheckBox.IsChecked ?? true
-                });
-                SaveAnimals();
-
-                MessageBox.Show("Animal added successfully.", "Success");
-                
-                IdTextBox.Text = "";
-                NameTextBox.Text = "";
-                HabitatComboBox.SelectedIndex = -1;
-                ArrivalDatePicker.SelectedDate = null;
-                HealthStatusComboBox.SelectedIndex = 0;
-                IsFedCheckBox.IsChecked = true;
-
-                RefreshDisplay();
-            }
-            else
+            if (!ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus))
             {
                 MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-        }
 
-        private void ShowListButton_Click(object sender, RoutedEventArgs e)
-        {
-            var sortedAnimals = GetSortedAnimals();
-            var listBox = new ListBox
+            if (animals.Any(a => a.id == id))
             {
-                ItemsSource = sortedAnimals,
-                Margin = new Thickness(0, 10, 0, 0),
-                ItemTemplate = (DataTemplate)FindResource("AnimalListTemplate")
+                MessageBox.Show("An animal with this ID already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var newAnimal = new Animal
+            {
+                id = id,
+                species = NameTextBox.Text,
+                habitat = habitat,
+                arrival_date = ArrivalDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd"),
+                health_status = healthStatus,
+                is_fed = IsFedCheckBox.IsChecked ?? true
             };
-            listBox.SelectionChanged += DisplayListBox_SelectionChanged;
-            DataDisplay.Content = listBox;
+
+            animals.Add(newAnimal);
+            SaveAnimals();
+            MessageBox.Show("Animal added successfully.", "Success");
+            ClearAddAnimalForm();
+            UpdateSearchResults();
         }
 
-        private void ShowLabelsButton_Click(object sender, RoutedEventArgs e)
+        private bool ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus)
         {
-            var sortedAnimals = GetSortedAnimals();
-            var panel = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
-            foreach (var animal in sortedAnimals)
-            {
-                var border = new Border
-                {
-                    BorderBrush = System.Windows.Media.Brushes.LightGray,
-                    BorderThickness = new Thickness(1),
-                    Background = System.Windows.Media.Brushes.White,
-                    CornerRadius = new System.Windows.CornerRadius(8),
-                    Margin = new Thickness(0, 4, 0, 4),
-                    Padding = new Thickness(12),
-                    Cursor = System.Windows.Input.Cursors.Hand,
-                    Tag = animal
-                };
+            id = 0;
+            habitat = null;
+            healthStatus = null;
 
-                var label = new Label
-                {
-                    Content = $"ID: {animal.id} | Species: {animal.species} | Habitat: {animal.habitat} | Arrival: {animal.arrival_date} | Health: {animal.health_status} | Fed: {animal.is_fed}",
-                    FontSize = 13,
-                    FontFamily = new System.Windows.Media.FontFamily("Segoe UI"),
-                    Foreground = System.Windows.Media.Brushes.DarkSlateGray
-                };
+            if (!int.TryParse(IdTextBox.Text, out id) || 
+                string.IsNullOrEmpty(NameTextBox.Text) ||
+                ArrivalDatePicker.SelectedDate == null)
+                return false;
 
-                border.Child = label;
-                border.MouseLeftButtonDown += (s, e) =>
-                {
-                    if (s is Border clickedBorder && clickedBorder.Tag is Animal clickedAnimal)
-                    {
-                        LoadAnimalForModification(clickedAnimal);
-                    }
-                };
-                panel.Children.Add(border);
-            }
-            DataDisplay.Content = panel;
+            if (HabitatComboBox.SelectedItem is ComboBoxItem habitatItem)
+                habitat = habitatItem.Content.ToString();
+            
+            if (HealthStatusComboBox.SelectedItem is ComboBoxItem healthItem)
+                healthStatus = healthItem.Content.ToString();
+
+            return habitat != null && healthStatus != null;
         }
 
-        private void DisplayListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClearAddAnimalForm()
         {
-            if (sender is ListBox listBox && listBox.SelectedItem is Animal animal)
-            {
-                LoadAnimalForModification(animal);
-            }
+            IdTextBox.Text = string.Empty;
+            NameTextBox.Text = string.Empty;
+            HabitatComboBox.SelectedIndex = -1;
+            ArrivalDatePicker.SelectedDate = null;
+            HealthStatusComboBox.SelectedIndex = 0;
+            IsFedCheckBox.IsChecked = true;
         }
 
         private void SearchRadio_Checked(object sender, RoutedEventArgs e)
@@ -168,118 +126,158 @@ namespace Zoo
             if (SearchTextBox == null || SearchComboBox == null || SearchFedCheckBox == null)
                 return;
 
-            SearchTextBox.Visibility = Visibility.Collapsed;
-            SearchComboBox.Visibility = Visibility.Collapsed;
-            SearchFedCheckBox.Visibility = Visibility.Collapsed;
+            HideAllSearchInputs();
             SearchComboBox.Items.Clear();
 
             if (SearchByIdRadio.IsChecked == true || SearchBySpeciesRadio.IsChecked == true)
             {
                 SearchTextBox.Visibility = Visibility.Visible;
-                SearchTextBox.Text = "";
+                SearchTextBox.Text = string.Empty;
             }
             else if (SearchByHabitatRadio.IsChecked == true)
             {
-                SearchComboBox.Visibility = Visibility.Visible;
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "All" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Savannah" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Rainforest" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Desert" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Aquatic" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Mountain" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Grassland" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Arctic" });
-                SearchComboBox.SelectedIndex = 0;
+                SetupHabitatSearchComboBox();
             }
             else if (SearchByHealthRadio.IsChecked == true)
             {
-                SearchComboBox.Visibility = Visibility.Visible;
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "All" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Excellent" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Good" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Fair" });
-                SearchComboBox.Items.Add(new ComboBoxItem { Content = "Poor" });
-                SearchComboBox.SelectedIndex = 0;
+                SetupHealthSearchComboBox();
             }
             else if (SearchByFedRadio.IsChecked == true)
             {
                 SearchFedCheckBox.Visibility = Visibility.Visible;
                 SearchFedCheckBox.IsChecked = false;
-                PerformSearch();
+                UpdateSearchResults();
             }
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void HideAllSearchInputs()
         {
-            PerformSearch();
+            SearchTextBox.Visibility = Visibility.Collapsed;
+            SearchComboBox.Visibility = Visibility.Collapsed;
+            SearchFedCheckBox.Visibility = Visibility.Collapsed;
         }
 
-        private void SearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SetupHabitatSearchComboBox()
         {
-            PerformSearch();
+            SearchComboBox.Visibility = Visibility.Visible;
+            var habitats = new[] { "All", "Savannah", "Rainforest", "Desert", "Aquatic", "Mountain", "Grassland", "Arctic" };
+            foreach (var habitat in habitats)
+                SearchComboBox.Items.Add(new ComboBoxItem { Content = habitat });
+            SearchComboBox.SelectedIndex = 0;
         }
 
-        private void SearchFedCheckBox_Changed(object sender, RoutedEventArgs e)
+        private void SetupHealthSearchComboBox()
         {
-            PerformSearch();
+            SearchComboBox.Visibility = Visibility.Visible;
+            var healthStatuses = new[] { "All", "Excellent", "Good", "Fair", "Poor" };
+            foreach (var status in healthStatuses)
+                SearchComboBox.Items.Add(new ComboBoxItem { Content = status });
+            SearchComboBox.SelectedIndex = 0;
         }
 
-        private void PerformSearch()
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) => UpdateSearchResults();
+        private void SearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UpdateSearchResults();
+        private void SearchFedCheckBox_Changed(object sender, RoutedEventArgs e) => UpdateSearchResults();
+        private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => UpdateSearchResults();
+
+        private void SortOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            isAscending = !isAscending;
+            SortOrderButton.Content = isAscending ? "⬆" : "⬇";
+            SortOrderButton.ToolTip = isAscending ? "Ascending" : "Descending";
+            UpdateSearchResults();
+        }
+
+        private void UpdateSearchResults()
         {
             if (SearchResultsListBox == null)
                 return;
 
-            List<Animal> results = new List<Animal>();
+            var results = GetFilteredAnimals();
+            var sortedResults = ApplySorting(results);
+            SearchResultsListBox.ItemsSource = sortedResults;
+        }
 
+        private List<Animal> GetFilteredAnimals()
+        {
             if (SearchByIdRadio.IsChecked == true)
-            {
-                if (int.TryParse(SearchTextBox.Text, out int searchId))
-                {
-                    results = animals.Where(a => a.id == searchId).ToList();
-                }
-            }
-            else if (SearchBySpeciesRadio.IsChecked == true)
-            {
-                string searchText = SearchTextBox.Text.ToLower();
-                results = animals.Where(a => a.species.ToLower().Contains(searchText)).ToList();
-            }
-            else if (SearchByHabitatRadio.IsChecked == true)
-            {
-                if (SearchComboBox.SelectedItem is ComboBoxItem item)
-                {
-                    string habitat = item.Content.ToString();
-                    if (habitat == "All")
-                        results = animals.ToList();
-                    else
-                        results = animals.Where(a => a.habitat == habitat).ToList();
-                }
-            }
-            else if (SearchByHealthRadio.IsChecked == true)
-            {
-                if (SearchComboBox.SelectedItem is ComboBoxItem item)
-                {
-                    string health = item.Content.ToString();
-                    if (health == "All")
-                        results = animals.ToList();
-                    else
-                        results = animals.Where(a => a.health_status == health).ToList();
-                }
-            }
-            else if (SearchByFedRadio.IsChecked == true)
-            {
-                bool showFed = SearchFedCheckBox.IsChecked ?? false;
-                results = animals.Where(a => a.is_fed == showFed).ToList();
-            }
+                return FilterById();
+            
+            if (SearchBySpeciesRadio.IsChecked == true)
+                return FilterBySpecies();
+            
+            if (SearchByHabitatRadio.IsChecked == true)
+                return FilterByHabitat();
+            
+            if (SearchByHealthRadio.IsChecked == true)
+                return FilterByHealth();
+            
+            if (SearchByFedRadio.IsChecked == true)
+                return FilterByFedStatus();
 
-            SearchResultsListBox.ItemsSource = results;
+            return animals.ToList();
+        }
+
+        private List<Animal> FilterById()
+        {
+            if (int.TryParse(SearchTextBox.Text, out int searchId))
+                return animals.Where(a => a.id == searchId).ToList();
+            return new List<Animal>();
+        }
+
+        private List<Animal> FilterBySpecies()
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+            return animals.Where(a => a.species.ToLower().Contains(searchText)).ToList();
+        }
+
+        private List<Animal> FilterByHabitat()
+        {
+            if (SearchComboBox.SelectedItem is ComboBoxItem item)
+            {
+                string habitat = item.Content.ToString();
+                return habitat == "All" ? animals.ToList() : animals.Where(a => a.habitat == habitat).ToList();
+            }
+            return animals.ToList();
+        }
+
+        private List<Animal> FilterByHealth()
+        {
+            if (SearchComboBox.SelectedItem is ComboBoxItem item)
+            {
+                string health = item.Content.ToString();
+                return health == "All" ? animals.ToList() : animals.Where(a => a.health_status == health).ToList();
+            }
+            return animals.ToList();
+        }
+
+        private List<Animal> FilterByFedStatus()
+        {
+            bool showFed = SearchFedCheckBox.IsChecked ?? false;
+            return animals.Where(a => a.is_fed == showFed).ToList();
+        }
+
+        private List<Animal> ApplySorting(List<Animal> animalsList)
+        {
+            if (SortComboBox == null || SortComboBox.SelectedIndex == -1)
+                return animalsList;
+
+            var sorted = SortComboBox.SelectedIndex switch
+            {
+                0 => isAscending ? animalsList.OrderBy(a => a.id) : animalsList.OrderByDescending(a => a.id),
+                1 => isAscending ? animalsList.OrderBy(a => a.species) : animalsList.OrderByDescending(a => a.species),
+                2 => isAscending ? animalsList.OrderBy(a => a.habitat) : animalsList.OrderByDescending(a => a.habitat),
+                3 => isAscending ? animalsList.OrderBy(a => a.arrival_date) : animalsList.OrderByDescending(a => a.arrival_date),
+                _ => animalsList.AsEnumerable()
+            };
+
+            return sorted.ToList();
         }
 
         private void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SearchResultsListBox.SelectedItem is Animal animal)
-            {
                 LoadAnimalForModification(animal);
-            }
         }
 
         private void LoadAnimalForModification(Animal animal)
@@ -288,35 +286,27 @@ namespace Zoo
 
             ModifyIdTextBox.Text = animal.id.ToString();
             ModifyNameTextBox.Text = animal.species;
-            
-            foreach (ComboBoxItem item in ModifyHabitatComboBox.Items)
-            {
-                if (item.Content.ToString() == animal.habitat)
-                {
-                    ModifyHabitatComboBox.SelectedItem = item;
-                    break;
-                }
-            }
-
-            foreach (ComboBoxItem item in ModifyHealthStatusComboBox.Items)
-            {
-                if (item.Content.ToString() == animal.health_status)
-                {
-                    ModifyHealthStatusComboBox.SelectedItem = item;
-                    break;
-                }
-            }
-
-            if (DateTime.TryParse(animal.arrival_date, out DateTime arrivalDate))
-            {
-                ModifyArrivalDatePicker.SelectedDate = arrivalDate;
-            }
-
+            ModifyArrivalDatePicker.SelectedDate = DateTime.TryParse(animal.arrival_date, out DateTime arrivalDate) ? arrivalDate : null;
             ModifyIsFedCheckBox.IsChecked = animal.is_fed;
+
+            SetComboBoxSelection(ModifyHabitatComboBox, animal.habitat);
+            SetComboBoxSelection(ModifyHealthStatusComboBox, animal.health_status);
 
             ModifyGrid.IsEnabled = true;
             ModifyButton.IsEnabled = true;
             DeleteButton.IsEnabled = true;
+        }
+
+        private void SetComboBoxSelection(ComboBox comboBox, string value)
+        {
+            foreach (ComboBoxItem item in comboBox.Items)
+            {
+                if (item.Content.ToString() == value)
+                {
+                    comboBox.SelectedItem = item;
+                    break;
+                }
+            }
         }
 
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
@@ -327,26 +317,34 @@ namespace Zoo
                 return;
             }
 
-            if (string.IsNullOrEmpty(ModifyNameTextBox.Text) ||
-                ModifyHabitatComboBox.SelectedItem == null ||
-                ModifyHealthStatusComboBox.SelectedItem == null ||
-                ModifyArrivalDatePicker.SelectedDate == null)
+            if (!ValidateModifyInput())
             {
                 MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
+            UpdateSelectedAnimal();
+            SaveAnimals();
+            MessageBox.Show("Animal updated successfully.", "Success");
+            UpdateSearchResults();
+            ClearModifyForm();
+        }
+
+        private bool ValidateModifyInput()
+        {
+            return !string.IsNullOrEmpty(ModifyNameTextBox.Text) &&
+                   ModifyHabitatComboBox.SelectedItem != null &&
+                   ModifyHealthStatusComboBox.SelectedItem != null &&
+                   ModifyArrivalDatePicker.SelectedDate != null;
+        }
+
+        private void UpdateSelectedAnimal()
+        {
             selectedAnimal.species = ModifyNameTextBox.Text;
             selectedAnimal.habitat = ((ComboBoxItem)ModifyHabitatComboBox.SelectedItem).Content.ToString();
             selectedAnimal.health_status = ((ComboBoxItem)ModifyHealthStatusComboBox.SelectedItem).Content.ToString();
             selectedAnimal.arrival_date = ModifyArrivalDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd");
             selectedAnimal.is_fed = ModifyIsFedCheckBox.IsChecked ?? true;
-
-            SaveAnimals();
-            MessageBox.Show("Animal updated successfully.", "Success");
-
-            RefreshDisplay();
-            ClearModifyForm();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -368,8 +366,7 @@ namespace Zoo
                 animals.Remove(selectedAnimal);
                 SaveAnimals();
                 MessageBox.Show("Animal deleted successfully.", "Success");
-
-                RefreshDisplay();
+                UpdateSearchResults();
                 ClearModifyForm();
             }
         }
@@ -377,8 +374,8 @@ namespace Zoo
         private void ClearModifyForm()
         {
             selectedAnimal = null;
-            ModifyIdTextBox.Text = "";
-            ModifyNameTextBox.Text = "";
+            ModifyIdTextBox.Text = string.Empty;
+            ModifyNameTextBox.Text = string.Empty;
             ModifyHabitatComboBox.SelectedIndex = -1;
             ModifyHealthStatusComboBox.SelectedIndex = -1;
             ModifyArrivalDatePicker.SelectedDate = null;
@@ -389,48 +386,17 @@ namespace Zoo
             DeleteButton.IsEnabled = false;
         }
 
-        private void RefreshDisplay()
-        {
-            if (DataDisplay == null)
-                return;
-
-            PerformSearch();
-
-            if (DataDisplay.Content is ListBox)
-            {
-                ShowListButton_Click(null, null);
-            }
-            else if (DataDisplay.Content is StackPanel)
-            {
-                ShowLabelsButton_Click(null, null);
-            }
-        }
-
-        private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RefreshDisplay();
-        }
-
-        private List<Animal> GetSortedAnimals()
-        {
-            if (SortComboBox == null || SortComboBox.SelectedIndex == -1)
-                return animals.ToList();
-
-            return SortComboBox.SelectedIndex switch
-            {
-                0 => animals.OrderBy(a => a.id).ToList(),
-                1 => animals.OrderBy(a => a.species).ToList(),
-                2 => animals.OrderBy(a => a.habitat).ToList(),
-                3 => animals.OrderBy(a => a.arrival_date).ToList(),
-                _ => animals.ToList()
-            };
-        }
-
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            var sortedAnimals = GetSortedAnimals();
+            var dataToExport = GetExportData();
+            
+            if (dataToExport.Count == 0)
+            {
+                MessageBox.Show("No data to export.", "No Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            var saveFileDialog = new SaveFileDialog
             {
                 Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
                 DefaultExt = "json",
@@ -441,15 +407,28 @@ namespace Zoo
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize(sortedAnimals, new JsonSerializerOptions { WriteIndented = true });
+                    string json = JsonSerializer.Serialize(dataToExport, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText(saveFileDialog.FileName, json);
-                    MessageBox.Show($"Data exported successfully to:\n{saveFileDialog.FileName}", "Export Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Successfully exported {dataToExport.Count} animal(s) to:\n{saveFileDialog.FileName}", 
+                        "Export Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error exporting data: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private List<Animal> GetExportData()
+        {
+            if (ExportSearchRadio.IsChecked == true)
+            {
+                if (SearchResultsListBox.ItemsSource is IEnumerable<Animal> searchResults)
+                    return searchResults.ToList();
+                return new List<Animal>();
+            }
+
+            return animals.ToList();
         }
     }
 }
