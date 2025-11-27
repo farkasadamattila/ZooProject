@@ -5,121 +5,338 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zoo"
         mc:Ignorable="d"
-        Title="Zoo Manager" Height="500" Width="800" MinHeight="400" MinWidth="600">
+        Title="Zoo Manager" Height="750" Width="1100" MinHeight="650" MinWidth="900"
+        FontFamily="Segoe UI">
     <Window.Resources>
         <DataTemplate x:Key="AnimalListTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="ID: " FontWeight="Bold"/>
-                <TextBlock Text="{Binding id}" Margin="0,0,10,0"/>
-                <TextBlock Text="Species: " FontWeight="Bold"/>
-                <TextBlock Text="{Binding species}" Margin="0,0,10,0"/>
-                <TextBlock Text="Habitat: " FontWeight="Bold"/>
-                <TextBlock Text="{Binding habitat}" Margin="0,0,10,0"/>
-                <TextBlock Text="Arrival: " FontWeight="Bold"/>
-                <TextBlock Text="{Binding arrival_date}"/>
-            </StackPanel>
+            <Border BorderBrush="#E0E0E0" BorderThickness="1" Padding="16" Margin="4" Background="White" CornerRadius="12">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" Opacity="0.1" BlurRadius="8" ShadowDepth="2"/>
+                </Border.Effect>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ID: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding id}" Margin="0,0,20,0" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock Text="Species: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding species}" Margin="0,0,20,0" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock Text="Habitat: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding habitat}" Margin="0,0,20,0" FontSize="13"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="Arrival: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding arrival_date}" Margin="0,0,20,0" FontSize="13"/>
+                        <TextBlock Text="Health: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding health_status}" Margin="0,0,20,0" FontSize="13"/>
+                        <TextBlock Text="Fed: " FontWeight="Bold" Foreground="#2E7D32" FontSize="13"/>
+                        <TextBlock Text="{Binding is_fed}" FontSize="13"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </DataTemplate>
+        
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000" Opacity="0.15" BlurRadius="6" ShadowDepth="2"/>
+                            </Border.Effect>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        
+        <Style TargetType="DatePicker">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        
+        <Style TargetType="CheckBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        
+        <Style TargetType="RadioButton">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+        
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
     </Window.Resources>
-    <Grid Background="#FF8EB897" Margin="0,0,0,-82">
+    
+    <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header: logo left, title center, clock right -->
-        <Grid Grid.Row="0" Margin="0,0,0,509" Background="#FF5B7553" Grid.RowSpan="2">
+        <Grid Grid.Row="0" Height="70" Background="#2E7D32">
+            <Grid.Effect>
+                <DropShadowEffect Color="#000000" Opacity="0.2" BlurRadius="10" ShadowDepth="3"/>
+            </Grid.Effect>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!-- Logo (simple emoji/text logo for now) -->
+            <TextBlock Text="🐾" FontSize="36" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"/>
 
-            <Viewbox Grid.Column="0" Height="40" Width="40" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="Zoo Manager" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <!-- Title -->
-            <TextBlock Grid.Column="1" Text="Zoo Manager" FontSize="28" FontWeight="Bold" Foreground="#333" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF5B7553"/>
-
-            <!-- Clock -->
-            <TextBlock x:Name="ClockTextBlock" Grid.Column="2" FontSize="16" FontWeight="SemiBold" Foreground="#333" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <TextBlock Text="🐾" FontSize="28" Background="#FF5B7553" Grid.Column="1" Margin="0,11,720,4" />
+            <TextBlock x:Name="ClockTextBlock" Grid.Column="2" FontSize="18" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0"/>
         </Grid>
 
-        <!-- Main Content -->
-        <Border Grid.Row="1" Margin="20,76,20,26" Padding="20" Background="#FFC3E8BD" CornerRadius="12" BorderBrush="#DDD" BorderThickness="1">
-            <StackPanel>
-                <TextBlock Text="Add New Animal" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,16" Foreground="#444"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20">
+            <StackPanel Margin="0,10,0,10">
+                
+                <Expander Header="➕ Add New Animal" FontSize="17" FontWeight="Bold" IsExpanded="True" Margin="0,0,0,16">
+                    <Expander.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="#2E7D32" FontSize="17" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        </DataTemplate>
+                    </Expander.HeaderTemplate>
+                    <Border Padding="20" Background="White" CornerRadius="12" BorderBrush="#E0E0E0" BorderThickness="1" Margin="0,8,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" Opacity="0.08" BlurRadius="10" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <Grid Margin="0,0,0,16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="160"/>
+                                    <ColumnDefinition Width="*" MinWidth="160"/>
+                                    <ColumnDefinition Width="*" MinWidth="160"/>
+                                </Grid.ColumnDefinitions>
 
-                <!-- Responsive form: grid with two columns that will stretch -->
-                <Grid Margin="0,0,0,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,16">
+                                    <TextBlock Text="ID" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <TextBox x:Name="IdTextBox" Height="34" Margin="0,6,0,0" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                </StackPanel>
 
-                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,12">
-                        <TextBlock Text="ID" FontWeight="Bold"/>
-                        <TextBox x:Name="IdTextBox" Height="28" Margin="0,4,0,0">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="1" Margin="6,0,6,16">
+                                    <TextBlock Text="Name (Species)" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <TextBox x:Name="NameTextBox" Height="34" Margin="0,6,0,0" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                </StackPanel>
 
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12">
-                        <TextBlock Text="Name (Species)" FontWeight="Bold"/>
-                        <TextBox x:Name="NameTextBox" Height="28" Margin="0,4,0,0">
-                            <TextBox.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </TextBox.Resources>
-                        </TextBox>
-                    </StackPanel>
+                                <StackPanel Grid.Row="0" Grid.Column="2" Margin="12,0,0,16">
+                                    <TextBlock Text="Habitat" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <ComboBox x:Name="HabitatComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
+                                        <ComboBoxItem Content="Savannah"/>
+                                        <ComboBoxItem Content="Rainforest"/>
+                                        <ComboBoxItem Content="Desert"/>
+                                        <ComboBoxItem Content="Aquatic"/>
+                                        <ComboBoxItem Content="Mountain"/>
+                                        <ComboBoxItem Content="Grassland"/>
+                                        <ComboBoxItem Content="Arctic"/>
+                                    </ComboBox>
+                                </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,12,0">
-                        <TextBlock Text="Habitat" FontWeight="Bold"/>
-                        <ComboBox x:Name="HabitatComboBox" Height="28" Margin="0,4,0,0">
-                            <ComboBox.Background>
-                                <LinearGradientBrush EndPoint="0,1">
-                                    <GradientStop Color="#FFF0F0F0"/>
-                                    <GradientStop Color="Red" Offset="1"/>
-                                </LinearGradientBrush>
-                            </ComboBox.Background>
-                            <ComboBoxItem Content="Savannah"/>
-                            <ComboBoxItem Content="Rainforest"/>
-                            <ComboBoxItem Content="Desert"/>
-                            <ComboBoxItem Content="Aquatic"/>
-                            <ComboBoxItem Content="Mountain"/>
-                            <ComboBoxItem Content="Grassland"/>
-                            <ComboBoxItem Content="Arctic"/>
-                            <!--<ComboBox.Template>
-                                <ControlTemplate TargetType="ComboBox">
-                                    <Border CornerRadius="10" />
-                                </ControlTemplate>
-                            </ComboBox.Template>-->
-                        </ComboBox>
-                    </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,12,0">
+                                    <TextBlock Text="Arrival Date" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <DatePicker x:Name="ArrivalDatePicker" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                </StackPanel>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1">
-                        <TextBlock Text="Arrival Date" FontWeight="Bold"/>
-                        <DatePicker x:Name="ArrivalDatePicker" Height="28" Margin="0,4,0,0"/>
-                    </StackPanel>
-                </Grid>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Margin="6,0,6,0">
+                                    <TextBlock Text="Health Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <ComboBox x:Name="HealthStatusComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
+                                        <ComboBoxItem Content="Excellent" IsSelected="True"/>
+                                        <ComboBoxItem Content="Good"/>
+                                        <ComboBoxItem Content="Fair"/>
+                                        <ComboBoxItem Content="Poor"/>
+                                    </ComboBox>
+                                </StackPanel>
 
-                <Button x:Name="AddAnimalButton" Content="Add Animal" Height="32" Width="140" HorizontalAlignment="Left" Background="#4CAF50" Foreground="White" BorderBrush="#388E3C" FontWeight="Bold" Click="AddAnimalButton_Click"/>
-                <Separator Margin="0,20,0,20"/>
-                <ContentControl x:Name="DataDisplay" Margin="0,20,0,0"/>
+                                <StackPanel Grid.Row="1" Grid.Column="2" Margin="12,0,0,0">
+                                    <TextBlock Text="Feeding Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                    <CheckBox x:Name="IsFedCheckBox" Content="Is Fed" Height="34" Margin="0,10,0,0" IsChecked="True" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Button x:Name="AddAnimalButton" Content="Add Animal" Height="40" Width="160" HorizontalAlignment="Left" Background="#4CAF50" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="AddAnimalButton_Click"/>
+                        </StackPanel>
+                    </Border>
+                </Expander>
+
+                <Expander Header="🔍 Search and Modify Animals" FontSize="17" FontWeight="Bold" IsExpanded="True" Margin="0,0,0,16">
+                    <Expander.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="#2E7D32" FontSize="17" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        </DataTemplate>
+                    </Expander.HeaderTemplate>
+                    <Border Padding="20" Background="White" CornerRadius="12" BorderBrush="#E0E0E0" BorderThickness="1" Margin="0,8,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" Opacity="0.08" BlurRadius="10" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Search Criteria" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12" FontFamily="Segoe UI"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16" FlowDirection="LeftToRight">
+                                    <RadioButton x:Name="SearchByIdRadio" Content="ID" GroupName="SearchType" Margin="0,0,20,0" IsChecked="True" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                    <RadioButton x:Name="SearchBySpeciesRadio" Content="Species" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                    <RadioButton x:Name="SearchByHabitatRadio" Content="Habitat" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                    <RadioButton x:Name="SearchByHealthRadio" Content="Health Status" GroupName="SearchType" Margin="0,0,20,0" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                    <RadioButton x:Name="SearchByFedRadio" Content="Fed Status" GroupName="SearchType" Checked="SearchRadio_Checked" FontWeight="Medium"/>
+                                </StackPanel>
+                                
+                                <StackPanel x:Name="SearchInputPanel">
+                                    <TextBox x:Name="SearchTextBox" Height="34" Margin="0,0,0,16" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1" TextChanged="SearchTextBox_TextChanged"/>
+                                    <ComboBox x:Name="SearchComboBox" Height="34" Visibility="Collapsed" Margin="0,0,0,16" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1" SelectionChanged="SearchComboBox_SelectionChanged"/>
+                                    <CheckBox x:Name="SearchFedCheckBox" Content="Show only fed animals" Height="34" Visibility="Collapsed" VerticalContentAlignment="Center" FontWeight="Medium" Margin="0,0,0,16" Checked="SearchFedCheckBox_Changed" Unchecked="SearchFedCheckBox_Changed"/>
+                                </StackPanel>
+                                
+                                <TextBlock Text="Search Results" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,4,0,12" FontFamily="Segoe UI"/>
+                                <ListBox x:Name="SearchResultsListBox" Height="200" ItemTemplate="{StaticResource AnimalListTemplate}" SelectionChanged="SearchResultsListBox_SelectionChanged" BorderBrush="#E0E0E0" BorderThickness="1"/>
+                            </StackPanel>
+                            
+                            <Border Grid.Column="1" Background="#E0E0E0" Width="1" Margin="0,8"/>
+                            
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Modify Selected Animal" FontWeight="Bold" FontSize="15" Foreground="#2E7D32" Margin="0,0,0,12" FontFamily="Segoe UI"/>
+                                <TextBlock Text="Select an animal from search results to modify" FontStyle="Italic" Foreground="#757575" FontSize="12" Margin="0,0,0,16" FontFamily="Segoe UI"/>
+                                
+                                <Grid x:Name="ModifyGrid" IsEnabled="False">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="0" Margin="0,0,0,12">
+                                        <TextBlock Text="ID (Read-only)" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBox x:Name="ModifyIdTextBox" Height="34" Margin="0,6,0,0" IsReadOnly="True" Background="#F5F5F5" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Margin="0,0,0,12">
+                                        <TextBlock Text="Name (Species)" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <TextBox x:Name="ModifyNameTextBox" Height="34" Margin="0,6,0,0" Padding="10,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Margin="0,0,0,12">
+                                        <TextBlock Text="Habitat" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <ComboBox x:Name="ModifyHabitatComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
+                                            <ComboBoxItem Content="Savannah"/>
+                                            <ComboBoxItem Content="Rainforest"/>
+                                            <ComboBoxItem Content="Desert"/>
+                                            <ComboBoxItem Content="Aquatic"/>
+                                            <ComboBoxItem Content="Mountain"/>
+                                            <ComboBoxItem Content="Grassland"/>
+                                            <ComboBoxItem Content="Arctic"/>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="3" Margin="0,0,0,12">
+                                        <TextBlock Text="Arrival Date" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <DatePicker x:Name="ModifyArrivalDatePicker" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="4" Margin="0,0,0,12">
+                                        <TextBlock Text="Health Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <ComboBox x:Name="ModifyHealthStatusComboBox" Height="34" Margin="0,6,0,0" Padding="8,6" BorderBrush="#BDBDBD" BorderThickness="1">
+                                            <ComboBoxItem Content="Excellent"/>
+                                            <ComboBoxItem Content="Good"/>
+                                            <ComboBoxItem Content="Fair"/>
+                                            <ComboBoxItem Content="Poor"/>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="5" Margin="0,0,0,16">
+                                        <TextBlock Text="Feeding Status" FontWeight="SemiBold" Foreground="#424242" FontSize="13" FontFamily="Segoe UI"/>
+                                        <CheckBox x:Name="ModifyIsFedCheckBox" Content="Is Fed" Height="34" Margin="0,10,0,0" VerticalContentAlignment="Center" FontWeight="Medium"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="ModifyButton" Content="Save Changes" Height="40" Width="140" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ModifyButton_Click" Margin="0,0,12,0" IsEnabled="False"/>
+                                    <Button x:Name="DeleteButton" Content="Delete Animal" Height="40" Width="140" Background="#F44336" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="DeleteButton_Click" IsEnabled="False"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Expander>
+
+                <Expander Header="📋 View All Animals" FontSize="17" FontWeight="Bold" IsExpanded="True" Margin="0,0,0,16">
+                    <Expander.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="#2E7D32" FontSize="17" FontWeight="Bold" FontFamily="Segoe UI"/>
+                        </DataTemplate>
+                    </Expander.HeaderTemplate>
+                    <Border Padding="20" Background="White" CornerRadius="12" BorderBrush="#E0E0E0" BorderThickness="1" Margin="0,8,0,0">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#000000" Opacity="0.08" BlurRadius="10" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                                <Button x:Name="ShowListButton" Content="Show as List" Height="38" Width="130" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ShowListButton_Click" Margin="0,0,12,0"/>
+                                <Button x:Name="ShowLabelsButton" Content="Show as Labels" Height="38" Width="130" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ShowLabelsButton_Click" Margin="0,0,12,0"/>
+                                <Button x:Name="ExportButton" Content="Export to JSON" Height="38" Width="140" Background="#FF9800" Foreground="White" BorderBrush="Transparent" Style="{StaticResource ModernButton}" Click="ExportButton_Click" Margin="0,0,12,0"/>
+                                <ComboBox x:Name="SortComboBox" Width="160" Height="38" SelectionChanged="SortComboBox_SelectionChanged" Padding="10,8" BorderBrush="#BDBDBD" BorderThickness="1" VerticalContentAlignment="Center">
+                                    <ComboBoxItem Content="Sort by ID" IsSelected="True"/>
+                                    <ComboBoxItem Content="Sort by Species"/>
+                                    <ComboBoxItem Content="Sort by Habitat"/>
+                                    <ComboBoxItem Content="Sort by Arrival Date"/>
+                                </ComboBox>
+                            </StackPanel>
+                            
+                            <ContentControl x:Name="DataDisplay" MinHeight="220"/>
+                        </StackPanel>
+                    </Border>
+                </Expander>
+
             </StackPanel>
-        </Border>
-
+        </ScrollViewer>
     </Grid>
 </Window>
