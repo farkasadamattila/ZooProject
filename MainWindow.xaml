@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zoo"
         mc:Ignorable="d"
-        Title="Zoo Manager" Height="750" Width="1100" MinHeight="650" MinWidth="900"
+        Title="Zoo Manager" Height="1005" Width="1100" MinHeight="650" MinWidth="900"
         FontFamily="Segoe UI">
     <Window.Resources>
         <DataTemplate x:Key="AnimalListTemplate">

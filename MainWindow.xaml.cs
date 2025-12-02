@@ -24,7 +24,7 @@ namespace Zoo
             animals = new List<Animal>();
             isAscending = true;
 
-            InitializeClock();
+            Óra();
             LoadAnimals();
 
             this.Loaded += MainWindow_Loaded;
@@ -35,15 +35,16 @@ namespace Zoo
             UpdateSearchResults();
         }
 
-        private void InitializeClock()
+        // óra/időhöz kell, lopottxd
+        private void Óra()
         {
             clockTimer = new DispatcherTimer();
             clockTimer.Interval = TimeSpan.FromSeconds(1);
-            clockTimer.Tick += ClockTimer_Tick;
+            clockTimer.Tick += óraElőrehaladás;
             clockTimer.Start();
         }
 
-        private void ClockTimer_Tick(object sender, EventArgs e)
+        private void óraElőrehaladás(object sender, EventArgs e)
         {
             if (ClockTextBlock != null)
             {
@@ -52,32 +53,23 @@ namespace Zoo
             }
         }
 
+        //beolvasás
         private void LoadAnimals()
         {
-            bool fileExists = File.Exists(JsonPath);
-            if (!fileExists)
-            {
-                return;
-            }
-
             string json = File.ReadAllText(JsonPath);
-            bool isJsonEmpty = string.IsNullOrWhiteSpace(json);
+            List<Animal> loadedAnimals = JsonSerializer.Deserialize<List<Animal>>(json);
 
-            if (!isJsonEmpty)
+            if (loadedAnimals != null)
             {
-                List<Animal> loadedAnimals = JsonSerializer.Deserialize<List<Animal>>(json);
-
-                if (loadedAnimals != null)
-                {
-                    animals = loadedAnimals;
-                }
-                else
-                {
-                    animals = new List<Animal>();
-                }
+                animals = loadedAnimals;
+            }
+            else
+            {
+                animals = new List<Animal>();
             }
         }
 
+        //ez a 2 a komment alatt a mentéshez kell
         private JsonSerializerOptions GetJsonOptions()
         {
             return new JsonSerializerOptions { WriteIndented = true };
@@ -89,6 +81,7 @@ namespace Zoo
             File.WriteAllText(JsonPath, json);
         }
 
+        //állatok hozzáadása (az első csinálja, a második függvény csak ellenőrzi)
         private void AddAnimalButton_Click(object sender, RoutedEventArgs e)
         {
             int id;
@@ -149,6 +142,7 @@ namespace Zoo
             return habitat != null && healthStatus != null;
         }
 
+        //űrlap tisztítása hozzáadás után
         private void ClearAddAnimalForm()
         {
             IdTextBox.Text = string.Empty;
@@ -159,6 +153,7 @@ namespace Zoo
             IsFedCheckBox.IsChecked = true;
         }
 
+        //kereséshez szükséges részek
         private void SearchRadio_Checked(object sender, RoutedEventArgs e)
         {
             bool controlsAreNotReady = SearchTextBox == null || SearchComboBox == null || SearchFedCheckBox == null;
@@ -196,7 +191,6 @@ namespace Zoo
                 UpdateSearchResults();
             }
         }
-
         private void HideAllSearchInputs()
         {
             SearchTextBox.Visibility = Visibility.Collapsed;
@@ -204,16 +198,15 @@ namespace Zoo
             SearchFedCheckBox.Visibility = Visibility.Collapsed;
         }
 
+        //kereséshez szükséges combobox(ok) feltöltése
         private void SetupHabitatSearchComboBox()
         {
             SetupSearchComboBox(new[] { "All", "Savannah", "Rainforest", "Desert", "Aquatic", "Mountain", "Grassland", "Arctic" });
         }
-
         private void SetupHealthSearchComboBox()
         {
             SetupSearchComboBox(new[] { "All", "Excellent", "Good", "Fair", "Poor" });
         }
-
         private void SetupSearchComboBox(string[] items)
         {
             SearchComboBox.Visibility = Visibility.Visible;
@@ -229,6 +222,7 @@ namespace Zoo
             SearchComboBox.SelectedIndex = 0;
         }
 
+        //keresés eseménykezelők (tudom nagyon elegáns)
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSearchResults();
@@ -244,11 +238,12 @@ namespace Zoo
             UpdateSearchResults();
         }
 
+
+        //rendezés eseménykezelők
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateSearchResults();
         }
-
         private void SortOrderButton_Click(object sender, RoutedEventArgs e)
         {
             isAscending = !isAscending;
@@ -267,6 +262,8 @@ namespace Zoo
             UpdateSearchResults();
         }
 
+
+        //kersése és rendezés logikája
         private void UpdateSearchResults()
         {
             if (SearchResultsListBox == null)
@@ -286,10 +283,12 @@ namespace Zoo
             if (SearchByHabitatRadio.IsChecked == true) return FilterByHabitat();
             if (SearchByHealthRadio.IsChecked == true) return FilterByHealth();
             if (SearchByFedRadio.IsChecked == true) return FilterByFedStatus();
-            
+
             return animals.ToList();
         }
 
+
+        //szűrés minden fiszem-faszom alapján
         private List<Animal> FilterById()
         {
             string searchText = SearchTextBox.Text;
@@ -389,6 +388,8 @@ namespace Zoo
             return matchingAnimals;
         }
 
+
+        //rendezés logikája
         private List<Animal> ApplySorting(List<Animal> animalsList)
         {
             bool sortingNotReady = SortComboBox == null || SortComboBox.SelectedIndex == -1;
@@ -452,6 +453,8 @@ namespace Zoo
             return sortedList;
         }
 
+
+        //állat módosítása és törlése (minimálisan bonyolult) - itt még csak megkapjuk hogy melyik állatot és mit akarunk módosítani
         private void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Animal selectedAnimalFromList = SearchResultsListBox.SelectedItem as Animal;
@@ -532,6 +535,8 @@ namespace Zoo
             ClearModifyForm();
         }
 
+
+        //módosítás ellenőrzése
         private bool ValidateModifyInput()
         {
             bool isNameFilled = !string.IsNullOrEmpty(ModifyNameTextBox.Text);
@@ -543,6 +548,8 @@ namespace Zoo
             return allFieldsValid;
         }
 
+
+        //módosítás alkalmazása
         private void UpdateSelectedAnimal()
         {
             selectedAnimal.species = ModifyNameTextBox.Text;
@@ -552,6 +559,8 @@ namespace Zoo
             selectedAnimal.is_fed = ModifyIsFedCheckBox.IsChecked ?? true;
         }
 
+
+        //állat törlése
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -575,6 +584,7 @@ namespace Zoo
             }
         }
 
+        //törlés v. módosítás után lenullázza az űrlapot
         private void ClearModifyForm()
         {
             selectedAnimal = null;
@@ -590,6 +600,8 @@ namespace Zoo
             DeleteButton.IsEnabled = false;
         }
 
+
+        //exportálás és annak csodálatos functionjei
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             List<Animal> dataToExport = GetExportData();
