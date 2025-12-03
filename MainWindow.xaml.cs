@@ -118,6 +118,8 @@ namespace Zoo
             SaveAnimals();
             MessageBox.Show("Animal added successfully.", "Success");
             ClearAddAnimalForm();
+            
+            RefreshSearchComboBoxIfNeeded();
             UpdateSearchResults();
         }
 
@@ -198,7 +200,7 @@ namespace Zoo
         //kereséshez szükséges részek
         private void SearchRadio_Checked(object sender, RoutedEventArgs e)
         {
-            bool controlsAreNotReady = SearchTextBox == null || SearchComboBox == null || SearchFedCheckBox == null;
+            bool controlsAreNotReady = SearchTextBox == null || SearchComboBox == null || SearchFedCheckBox == null || SortComboBox == null;
             if (controlsAreNotReady)
             {
                 return;
@@ -213,19 +215,33 @@ namespace Zoo
             bool isSearchByHealth = SearchByHealthRadio.IsChecked == true;
             bool isSearchByFed = SearchByFedRadio.IsChecked == true;
 
-            if (isSearchById || isSearchBySpecies)
+            if (isSearchById)
             {
                 SearchTextBox.Visibility = Visibility.Visible;
                 SearchTextBox.Text = string.Empty;
+                SortComboBox.IsEnabled = false;
+                UpdateSearchResults();
+            }
+            else if (isSearchBySpecies)
+            {
+                SetupSpeciesSearchComboBox();
+                SortComboBox.IsEnabled = true;
             }
             else if (isSearchByHabitat)
-            { SetupHabitatSearchComboBox(); }
+            { 
+                SetupHabitatSearchComboBox();
+                SortComboBox.IsEnabled = true;
+            }
             else if (isSearchByHealth)
-            { SetupHealthSearchComboBox(); }
+            { 
+                SetupHealthSearchComboBox();
+                SortComboBox.IsEnabled = true;
+            }
             else if (isSearchByFed)
             {
                 SearchFedCheckBox.Visibility = Visibility.Visible;
                 SearchFedCheckBox.IsChecked = false;
+                SortComboBox.IsEnabled = true;
                 UpdateSearchResults();
             }
         }
@@ -237,8 +253,21 @@ namespace Zoo
         }
 
         //kereséshez szükséges combobox(ok) feltöltése
+        private void SetupSpeciesSearchComboBox()
+        {
+            List<string> uniqueSpecies = animalsList
+                .Select(a => a.species)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+            
+            uniqueSpecies.Insert(0, "All");
+            SetupSearchComboBox(uniqueSpecies.ToArray());
+        }
+
         private void SetupHabitatSearchComboBox()
         { SetupSearchComboBox(new[] { "All", "Savannah", "Rainforest", "Desert", "Aquatic", "Mountain", "Grassland", "Arctic" }); }
+        
         private void SetupHealthSearchComboBox()
         { SetupSearchComboBox(new[] { "All", "Excellent", "Good", "Fair", "Poor" }); }
         private void SetupSearchComboBox(string[] items)
@@ -312,6 +341,12 @@ namespace Zoo
         private List<Animal> FilterById()
         {
             string searchText = SearchTextBox.Text;
+            
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return animalsList.ToList();
+            }
+            
             int searchId;
             bool isValidNumber = int.TryParse(searchText, out searchId);
 
@@ -330,21 +365,7 @@ namespace Zoo
 
         private List<Animal> FilterBySpecies()
         {
-            string searchText = SearchTextBox.Text;
-            string searchTextLower = searchText.ToLower();
-
-            List<Animal> matchingAnimals = new List<Animal>();
-
-            foreach (Animal animal in animalsList)
-            {
-                string speciesLower = animal.species.ToLower();
-                bool containsSearchText = speciesLower.Contains(searchTextLower);
-
-                if (containsSearchText)
-                { matchingAnimals.Add(animal); }
-            }
-
-            return matchingAnimals;
+            return FilterByComboBoxSelection(a => a.species);
         }
 
         private List<Animal> FilterByHabitat()
@@ -502,6 +523,8 @@ namespace Zoo
             UpdateSelectedAnimal();
             SaveAnimals();
             MessageBox.Show("Animal updated successfully.", "Success");
+            
+            RefreshSearchComboBoxIfNeeded();
             UpdateSearchResults();
 
             // Re-load the modified animal to show updated values
@@ -547,6 +570,8 @@ namespace Zoo
                 animalsList.Remove(selectedAnimal);
                 SaveAnimals();
                 MessageBox.Show("Animal deleted successfully.", "Success");
+                
+                RefreshSearchComboBoxIfNeeded();
                 UpdateSearchResults();
                 ClearModifyForm();
             }
@@ -560,6 +585,34 @@ namespace Zoo
             ModifyGrid.IsEnabled = false;
             ModifyButton.IsEnabled = false;
             DeleteButton.IsEnabled = false;
+        }
+
+        //Refresh the search dropdown when species changes
+        private void RefreshSearchComboBoxIfNeeded()
+        {
+            bool isSearchBySpecies = SearchBySpeciesRadio.IsChecked == true;
+            if (isSearchBySpecies && SearchComboBox.Visibility == Visibility.Visible)
+            {
+                object currentSelection = SearchComboBox.SelectedItem;
+                SetupSpeciesSearchComboBox();
+                
+                // Try to maintain the previous selection if it still exists
+                if (currentSelection != null)
+                {
+                    string previousValue = (currentSelection as ComboBoxItem)?.Content.ToString();
+                    foreach (ComboBoxItem item in SearchComboBox.Items)
+                    {
+                        if (item.Content.ToString() == previousValue)
+                        {
+                            SearchComboBox.SelectedItem = item;
+                            return;
+                        }
+                    }
+                }
+                
+                // If previous selection doesn't exist anymore, default to "All"
+                SearchComboBox.SelectedIndex = 0;
+            }
         }
 
 

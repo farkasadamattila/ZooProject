@@ -1,1 +1,2 @@
 Állatkert Manager 
+Íme a legigazibb hamis állatkert és annak eskü teljesen való állatainak kitalált progi, ami képes akár 60%-l gyorsabb adatintézésre más nem létező hamis állatkert menedzselő manager 👍 programoknál. Vegyél fel új állatkát, módósítsd annak tulajdonságait (pl.: élőhely, név) vagy rúgd ki páros lábbal azt a szerencsétlent az embereknek tárva nyitva álló kapukon. (nem amúgy minden állatkát szeretünk :3)

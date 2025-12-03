@@ -2,629 +2,1241 @@
   {
     "id": 1,
     "species": "Lion",
-    "habitat": "Savanna",
-    "arrival_date": "2021-03-12"
+    "habitat": "Savannah",
+    "arrival_date": "2021-03-12",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 2,
     "species": "Lion",
-    "habitat": "Savanna",
-    "arrival_date": "2022-05-18"
+    "habitat": "Savannah",
+    "arrival_date": "2022-05-18",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 3,
     "species": "Lion",
-    "habitat": "Savanna",
-    "arrival_date": "2020-11-02"
+    "habitat": "Savannah",
+    "arrival_date": "2020-11-02",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 4,
     "species": "Elephant",
-    "habitat": "Savanna",
-    "arrival_date": "2023-07-09"
+    "habitat": "Savannah",
+    "arrival_date": "2023-07-09",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 5,
     "species": "Elephant",
-    "habitat": "Savanna",
-    "arrival_date": "2022-04-27"
+    "habitat": "Savannah",
+    "arrival_date": "2022-04-27",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 6,
     "species": "Elephant",
-    "habitat": "Savanna",
-    "arrival_date": "2021-12-15"
+    "habitat": "Savannah",
+    "arrival_date": "2021-12-15",
+    "health_status": "Poor",
+    "is_fed": false
   },
   {
     "id": 7,
     "species": "Giraffe",
-    "habitat": "Savanna",
-    "arrival_date": "2020-09-21"
+    "habitat": "Savannah",
+    "arrival_date": "2020-09-21",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 8,
     "species": "Giraffe",
-    "habitat": "Savanna",
-    "arrival_date": "2023-01-10"
+    "habitat": "Savannah",
+    "arrival_date": "2023-01-10",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 9,
     "species": "Giraffe",
-    "habitat": "Savanna",
-    "arrival_date": "2024-02-05"
+    "habitat": "Savannah",
+    "arrival_date": "2024-02-05",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 10,
     "species": "Cheetah",
-    "habitat": "Savanna",
-    "arrival_date": "2021-06-03"
+    "habitat": "Savannah",
+    "arrival_date": "2021-06-03",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 11,
     "species": "Zebra",
-    "habitat": "Savanna",
-    "arrival_date": "2020-04-12"
+    "habitat": "Savannah",
+    "arrival_date": "2020-04-12",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 12,
     "species": "Zebra",
-    "habitat": "Savanna",
-    "arrival_date": "2022-09-08"
+    "habitat": "Savannah",
+    "arrival_date": "2022-09-08",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 13,
     "species": "Zebra",
-    "habitat": "Savanna",
-    "arrival_date": "2023-03-17"
+    "habitat": "Savannah",
+    "arrival_date": "2023-03-17",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 14,
     "species": "Hyena",
-    "habitat": "Savanna",
-    "arrival_date": "2021-07-24"
+    "habitat": "Savannah",
+    "arrival_date": "2021-07-24",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 15,
     "species": "Hyena",
-    "habitat": "Savanna",
-    "arrival_date": "2022-11-19"
+    "habitat": "Savannah",
+    "arrival_date": "2022-11-19",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 16,
-    "species": "Hyena",
-    "habitat": "Savanna",
-    "arrival_date": "2020-01-13"
+    "species": "Rhinoceros",
+    "habitat": "Savannah",
+    "arrival_date": "2020-01-13",
+    "health_status": "Poor",
+    "is_fed": false
   },
-
   {
     "id": 17,
-    "species": "Wolf",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2023-02-16"
+    "species": "Rhinoceros",
+    "habitat": "Savannah",
+    "arrival_date": "2023-02-16",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 18,
-    "species": "Wolf",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2021-09-30"
+    "species": "Jaguar",
+    "habitat": "Rainforest",
+    "arrival_date": "2021-09-30",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 19,
-    "species": "Wolf",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2022-12-01"
+    "species": "Jaguar",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-12-01",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 20,
-    "species": "Fox",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2020-08-05"
+    "species": "Toucan",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-08-05",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 21,
-    "species": "Fox",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2023-05-22"
+    "species": "Toucan",
+    "habitat": "Rainforest",
+    "arrival_date": "2023-05-22",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 22,
-    "species": "Fox",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2024-01-28"
+    "species": "Monkey",
+    "habitat": "Rainforest",
+    "arrival_date": "2024-01-28",
+    "health_status": "Excellent",
+    "is_fed": false
   },
-
   {
     "id": 23,
-    "species": "Bear",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2021-10-11"
+    "species": "Monkey",
+    "habitat": "Rainforest",
+    "arrival_date": "2021-10-11",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 24,
-    "species": "Bear",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2022-03-02"
+    "species": "Sloth",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-03-02",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 25,
-    "species": "Bear",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2023-06-14"
+    "species": "Sloth",
+    "habitat": "Rainforest",
+    "arrival_date": "2023-06-14",
+    "health_status": "Excellent",
+    "is_fed": false
   },
-
   {
     "id": 26,
-    "species": "Deer",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2020-12-09"
+    "species": "Parrot",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-12-09",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 27,
-    "species": "Deer",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2022-07-18"
+    "species": "Parrot",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-07-18",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 28,
-    "species": "Deer",
-    "habitat": "Temperate Forest",
-    "arrival_date": "2024-03-29"
+    "species": "Gorilla",
+    "habitat": "Rainforest",
+    "arrival_date": "2024-03-29",
+    "health_status": "Fair",
+    "is_fed": false
   },
-
   {
     "id": 29,
-    "species": "Rabbit",
-    "habitat": "Grassland",
-    "arrival_date": "2023-04-03"
+    "species": "Gorilla",
+    "habitat": "Rainforest",
+    "arrival_date": "2023-04-03",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 30,
-    "species": "Rabbit",
-    "habitat": "Grassland",
-    "arrival_date": "2021-02-26"
+    "species": "Chimpanzee",
+    "habitat": "Rainforest",
+    "arrival_date": "2021-02-26",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 31,
-    "species": "Rabbit",
-    "habitat": "Grassland",
-    "arrival_date": "2020-10-30"
+    "species": "Chimpanzee",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-10-30",
+    "health_status": "Poor",
+    "is_fed": false
   },
-
   {
     "id": 32,
-    "species": "Kangaroo",
-    "habitat": "Grassland",
-    "arrival_date": "2022-08-12"
+    "species": "Snake",
+    "habitat": "Desert",
+    "arrival_date": "2022-08-12",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 33,
-    "species": "Kangaroo",
-    "habitat": "Grassland",
-    "arrival_date": "2023-11-05"
+    "species": "Snake",
+    "habitat": "Desert",
+    "arrival_date": "2023-11-05",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 34,
-    "species": "Kangaroo",
-    "habitat": "Grassland",
-    "arrival_date": "2021-04-22"
+    "species": "Camel",
+    "habitat": "Desert",
+    "arrival_date": "2021-04-22",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 35,
-    "species": "Bison",
-    "habitat": "Grassland",
-    "arrival_date": "2020-06-14"
+    "species": "Camel",
+    "habitat": "Desert",
+    "arrival_date": "2020-06-14",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 36,
-    "species": "Bison",
-    "habitat": "Grassland",
-    "arrival_date": "2022-01-19"
+    "species": "Scorpion",
+    "habitat": "Desert",
+    "arrival_date": "2022-01-19",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 37,
-    "species": "Bison",
-    "habitat": "Grassland",
-    "arrival_date": "2023-08-07"
+    "species": "Scorpion",
+    "habitat": "Desert",
+    "arrival_date": "2023-08-07",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 38,
-    "species": "Eagle",
-    "habitat": "Mountains",
-    "arrival_date": "2020-03-25"
+    "species": "Lizard",
+    "habitat": "Desert",
+    "arrival_date": "2020-03-25",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 39,
-    "species": "Eagle",
-    "habitat": "Mountains",
-    "arrival_date": "2021-07-11"
+    "species": "Lizard",
+    "habitat": "Desert",
+    "arrival_date": "2021-07-11",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 40,
-    "species": "Eagle",
-    "habitat": "Mountains",
-    "arrival_date": "2023-09-03"
+    "species": "Meerkat",
+    "habitat": "Desert",
+    "arrival_date": "2023-09-03",
+    "health_status": "Excellent",
+    "is_fed": true
   },
-
   {
     "id": 41,
-    "species": "Goat",
-    "habitat": "Mountains",
-    "arrival_date": "2022-05-14"
+    "species": "Meerkat",
+    "habitat": "Desert",
+    "arrival_date": "2022-05-14",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 42,
-    "species": "Goat",
-    "habitat": "Mountains",
-    "arrival_date": "2021-03-08"
+    "species": "Dolphin",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-03-08",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 43,
-    "species": "Goat",
-    "habitat": "Mountains",
-    "arrival_date": "2024-02-11"
+    "species": "Dolphin",
+    "habitat": "Aquatic",
+    "arrival_date": "2024-02-11",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 44,
-    "species": "Sheep",
-    "habitat": "Grassland",
-    "arrival_date": "2020-11-07"
+    "species": "Shark",
+    "habitat": "Aquatic",
+    "arrival_date": "2020-11-07",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 45,
-    "species": "Sheep",
-    "habitat": "Grassland",
-    "arrival_date": "2022-02-21"
+    "species": "Shark",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-02-21",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 46,
-    "species": "Sheep",
-    "habitat": "Grassland",
-    "arrival_date": "2023-06-27"
+    "species": "Seal",
+    "habitat": "Aquatic",
+    "arrival_date": "2023-06-27",
+    "health_status": "Excellent",
+    "is_fed": false
   },
-
   {
     "id": 47,
-    "species": "Cow",
-    "habitat": "Farms",
-    "arrival_date": "2021-01-18"
+    "species": "Seal",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-01-18",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 48,
-    "species": "Cow",
-    "habitat": "Farms",
-    "arrival_date": "2023-10-04"
+    "species": "Otter",
+    "habitat": "Aquatic",
+    "arrival_date": "2023-10-04",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 49,
-    "species": "Cow",
-    "habitat": "Farms",
-    "arrival_date": "2022-05-16"
+    "species": "Otter",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-05-16",
+    "health_status": "Poor",
+    "is_fed": false
   },
-
   {
     "id": 50,
-    "species": "Pig",
-    "habitat": "Farms",
-    "arrival_date": "2020-09-02"
+    "species": "Penguin",
+    "habitat": "Aquatic",
+    "arrival_date": "2020-09-02",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 51,
-    "species": "Pig",
-    "habitat": "Farms",
-    "arrival_date": "2022-11-25"
+    "species": "Penguin",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-11-25",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 52,
-    "species": "Pig",
-    "habitat": "Farms",
-    "arrival_date": "2023-03-12"
+    "species": "Walrus",
+    "habitat": "Aquatic",
+    "arrival_date": "2023-03-12",
+    "health_status": "Fair",
+    "is_fed": true
   },
-
   {
     "id": 53,
-    "species": "Horse",
-    "habitat": "Grassland",
-    "arrival_date": "2021-08-29"
+    "species": "Walrus",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-08-29",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 54,
-    "species": "Horse",
-    "habitat": "Grassland",
-    "arrival_date": "2023-04-19"
+    "species": "Eagle",
+    "habitat": "Mountain",
+    "arrival_date": "2023-04-19",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 55,
-    "species": "Horse",
-    "habitat": "Grassland",
-    "arrival_date": "2022-06-23"
+    "species": "Eagle",
+    "habitat": "Mountain",
+    "arrival_date": "2022-06-23",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 56,
-    "species": "Dog",
-    "habitat": "Urban",
-    "arrival_date": "2020-05-15"
+    "species": "Goat",
+    "habitat": "Mountain",
+    "arrival_date": "2020-05-15",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 57,
-    "species": "Dog",
-    "habitat": "Urban",
-    "arrival_date": "2021-11-30"
+    "species": "Goat",
+    "habitat": "Mountain",
+    "arrival_date": "2021-11-30",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 58,
-    "species": "Dog",
-    "habitat": "Urban",
-    "arrival_date": "2023-07-08"
+    "species": "Snow Leopard",
+    "habitat": "Mountain",
+    "arrival_date": "2023-07-08",
+    "health_status": "Excellent",
+    "is_fed": true
   },
-
   {
     "id": 59,
-    "species": "Cat",
-    "habitat": "Urban",
-    "arrival_date": "2022-03-14"
+    "species": "Snow Leopard",
+    "habitat": "Mountain",
+    "arrival_date": "2022-03-14",
+    "health_status": "Poor",
+    "is_fed": false
   },
   {
     "id": 60,
-    "species": "Cat",
-    "habitat": "Urban",
-    "arrival_date": "2020-12-22"
+    "species": "Vulture",
+    "habitat": "Mountain",
+    "arrival_date": "2020-12-22",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 61,
-    "species": "Cat",
-    "habitat": "Urban",
-    "arrival_date": "2023-09-17"
+    "species": "Vulture",
+    "habitat": "Mountain",
+    "arrival_date": "2023-09-17",
+    "health_status": "Fair",
+    "is_fed": false
   },
-
   {
     "id": 62,
-    "species": "Pigeon",
-    "habitat": "Urban",
-    "arrival_date": "2021-04-10"
+    "species": "Yak",
+    "habitat": "Mountain",
+    "arrival_date": "2021-04-10",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 63,
-    "species": "Pigeon",
-    "habitat": "Urban",
-    "arrival_date": "2022-01-31"
+    "species": "Yak",
+    "habitat": "Mountain",
+    "arrival_date": "2022-01-31",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 64,
-    "species": "Pigeon",
-    "habitat": "Urban",
-    "arrival_date": "2023-05-29"
+    "species": "Bison",
+    "habitat": "Grassland",
+    "arrival_date": "2023-05-29",
+    "health_status": "Excellent",
+    "is_fed": false
   },
-
   {
     "id": 65,
-    "species": "Crow",
-    "habitat": "Urban",
-    "arrival_date": "2020-08-18"
+    "species": "Bison",
+    "habitat": "Grassland",
+    "arrival_date": "2020-08-18",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 66,
-    "species": "Crow",
-    "habitat": "Urban",
-    "arrival_date": "2022-06-06"
+    "species": "Horse",
+    "habitat": "Grassland",
+    "arrival_date": "2022-06-06",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 67,
-    "species": "Crow",
-    "habitat": "Urban",
-    "arrival_date": "2024-01-13"
+    "species": "Horse",
+    "habitat": "Grassland",
+    "arrival_date": "2024-01-13",
+    "health_status": "Excellent",
+    "is_fed": false
   },
-
   {
     "id": 68,
-    "species": "Owl",
-    "habitat": "Forest",
-    "arrival_date": "2021-09-09"
+    "species": "Kangaroo",
+    "habitat": "Grassland",
+    "arrival_date": "2021-09-09",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 69,
-    "species": "Owl",
-    "habitat": "Forest",
-    "arrival_date": "2023-02-24"
+    "species": "Kangaroo",
+    "habitat": "Grassland",
+    "arrival_date": "2023-02-24",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 70,
-    "species": "Owl",
-    "habitat": "Forest",
-    "arrival_date": "2020-11-18"
+    "species": "Deer",
+    "habitat": "Grassland",
+    "arrival_date": "2020-11-18",
+    "health_status": "Excellent",
+    "is_fed": true
   },
-
   {
     "id": 71,
-    "species": "Squirrel",
-    "habitat": "Forest",
-    "arrival_date": "2022-10-12"
+    "species": "Deer",
+    "habitat": "Grassland",
+    "arrival_date": "2022-10-12",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 72,
-    "species": "Squirrel",
-    "habitat": "Forest",
-    "arrival_date": "2021-06-04"
+    "species": "Antelope",
+    "habitat": "Grassland",
+    "arrival_date": "2021-06-04",
+    "health_status": "Poor",
+    "is_fed": false
   },
   {
     "id": 73,
-    "species": "Squirrel",
-    "habitat": "Forest",
-    "arrival_date": "2023-08-22"
+    "species": "Antelope",
+    "habitat": "Grassland",
+    "arrival_date": "2023-08-22",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 74,
-    "species": "Raccoon",
-    "habitat": "Forest",
-    "arrival_date": "2020-07-27"
+    "species": "Prairie Dog",
+    "habitat": "Grassland",
+    "arrival_date": "2020-07-27",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 75,
-    "species": "Raccoon",
-    "habitat": "Forest",
-    "arrival_date": "2022-03-05"
+    "species": "Prairie Dog",
+    "habitat": "Grassland",
+    "arrival_date": "2022-03-05",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 76,
-    "species": "Raccoon",
-    "habitat": "Forest",
-    "arrival_date": "2024-02-16"
+    "species": "Polar Bear",
+    "habitat": "Arctic",
+    "arrival_date": "2024-02-16",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 77,
-    "species": "Frog",
-    "habitat": "Wetlands",
-    "arrival_date": "2021-05-06"
+    "species": "Polar Bear",
+    "habitat": "Arctic",
+    "arrival_date": "2021-05-06",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 78,
-    "species": "Frog",
-    "habitat": "Wetlands",
-    "arrival_date": "2022-07-12"
+    "species": "Arctic Fox",
+    "habitat": "Arctic",
+    "arrival_date": "2022-07-12",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 79,
-    "species": "Frog",
-    "habitat": "Wetlands",
-    "arrival_date": "2023-10-21"
+    "species": "Arctic Fox",
+    "habitat": "Arctic",
+    "arrival_date": "2023-10-21",
+    "health_status": "Fair",
+    "is_fed": false
   },
-
   {
     "id": 80,
-    "species": "Snake",
-    "habitat": "Desert",
-    "arrival_date": "2020-03-14"
+    "species": "Reindeer",
+    "habitat": "Arctic",
+    "arrival_date": "2020-03-14",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 81,
-    "species": "Snake",
-    "habitat": "Desert",
-    "arrival_date": "2022-09-01"
+    "species": "Reindeer",
+    "habitat": "Arctic",
+    "arrival_date": "2022-09-01",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 82,
-    "species": "Snake",
-    "habitat": "Desert",
-    "arrival_date": "2023-11-11"
+    "species": "Arctic Hare",
+    "habitat": "Arctic",
+    "arrival_date": "2023-11-11",
+    "health_status": "Poor",
+    "is_fed": false
   },
-
   {
     "id": 83,
-    "species": "Camel",
-    "habitat": "Desert",
-    "arrival_date": "2021-01-07"
+    "species": "Arctic Hare",
+    "habitat": "Arctic",
+    "arrival_date": "2021-01-07",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 84,
-    "species": "Camel",
-    "habitat": "Desert",
-    "arrival_date": "2022-10-15"
+    "species": "Snowy Owl",
+    "habitat": "Arctic",
+    "arrival_date": "2022-10-15",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 85,
-    "species": "Camel",
-    "habitat": "Desert",
-    "arrival_date": "2023-04-28"
+    "species": "Snowy Owl",
+    "habitat": "Arctic",
+    "arrival_date": "2023-04-28",
+    "health_status": "Fair",
+    "is_fed": true
   },
-
   {
     "id": 86,
-    "species": "Penguin",
-    "habitat": "Antarctic",
-    "arrival_date": "2020-12-01"
+    "species": "Tiger",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-12-01",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 87,
-    "species": "Penguin",
-    "habitat": "Antarctic",
-    "arrival_date": "2022-02-11"
+    "species": "Tiger",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-02-11",
+    "health_status": "Excellent",
+    "is_fed": false
   },
   {
     "id": 88,
-    "species": "Penguin",
-    "habitat": "Antarctic",
-    "arrival_date": "2023-01-30"
+    "species": "Leopard",
+    "habitat": "Savannah",
+    "arrival_date": "2023-01-30",
+    "health_status": "Good",
+    "is_fed": true
   },
-
   {
     "id": 89,
-    "species": "Seal",
-    "habitat": "Arctic Coast",
-    "arrival_date": "2021-03-04"
+    "species": "Leopard",
+    "habitat": "Savannah",
+    "arrival_date": "2021-03-04",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 90,
-    "species": "Seal",
-    "habitat": "Arctic Coast",
-    "arrival_date": "2023-06-16"
+    "species": "Wolf",
+    "habitat": "Mountain",
+    "arrival_date": "2023-06-16",
+    "health_status": "Excellent",
+    "is_fed": true
   },
   {
     "id": 91,
-    "species": "Seal",
-    "habitat": "Arctic Coast",
-    "arrival_date": "2022-04-25"
+    "species": "Wolf",
+    "habitat": "Mountain",
+    "arrival_date": "2022-04-25",
+    "health_status": "Good",
+    "is_fed": false
   },
-
   {
     "id": 92,
-    "species": "Walrus",
-    "habitat": "Arctic",
-    "arrival_date": "2020-05-20"
+    "species": "Flamingo",
+    "habitat": "Aquatic",
+    "arrival_date": "2020-05-20",
+    "health_status": "Poor",
+    "is_fed": true
   },
   {
     "id": 93,
-    "species": "Walrus",
-    "habitat": "Arctic",
-    "arrival_date": "2021-09-28"
+    "species": "Flamingo",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-09-28",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 94,
-    "species": "Walrus",
-    "habitat": "Arctic",
-    "arrival_date": "2023-02-07"
+    "species": "Crocodile",
+    "habitat": "Aquatic",
+    "arrival_date": "2023-02-07",
+    "health_status": "Excellent",
+    "is_fed": true
   },
-
   {
     "id": 95,
-    "species": "Dolphin",
-    "habitat": "Ocean",
-    "arrival_date": "2021-07-01"
+    "species": "Crocodile",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-07-01",
+    "health_status": "Fair",
+    "is_fed": false
   },
   {
     "id": 96,
-    "species": "Dolphin",
-    "habitat": "Ocean",
-    "arrival_date": "2022-08-13"
+    "species": "Hippopotamus",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-08-13",
+    "health_status": "Good",
+    "is_fed": true
   },
   {
     "id": 97,
-    "species": "Dolphin",
-    "habitat": "Ocean",
-    "arrival_date": "2024-04-02"
+    "species": "Hippopotamus",
+    "habitat": "Aquatic",
+    "arrival_date": "2024-04-02",
+    "health_status": "Excellent",
+    "is_fed": true
   },
-
   {
     "id": 98,
-    "species": "Shark",
-    "habitat": "Ocean",
-    "arrival_date": "2020-06-09"
+    "species": "Ostrich",
+    "habitat": "Savannah",
+    "arrival_date": "2020-06-09",
+    "health_status": "Good",
+    "is_fed": false
   },
   {
     "id": 99,
-    "species": "Shark",
-    "habitat": "Ocean",
-    "arrival_date": "2021-10-26"
+    "species": "Ostrich",
+    "habitat": "Savannah",
+    "arrival_date": "2021-10-26",
+    "health_status": "Fair",
+    "is_fed": true
   },
   {
     "id": 100,
-    "species": "Shark",
-    "habitat": "Ocean",
-    "arrival_date": "2023-12-18"
+    "species": "Panda",
+    "habitat": "Mountain",
+    "arrival_date": "2023-12-18",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 101,
+    "species": "Panda",
+    "habitat": "Mountain",
+    "arrival_date": "2022-05-29",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 102,
+    "species": "Red Panda",
+    "habitat": "Mountain",
+    "arrival_date": "2021-11-14",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 103,
+    "species": "Red Panda",
+    "habitat": "Mountain",
+    "arrival_date": "2023-08-05",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 104,
+    "species": "Koala",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-09-17",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 105,
+    "species": "Koala",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-01-22",
+    "health_status": "Poor",
+    "is_fed": false
+  },
+  {
+    "id": 106,
+    "species": "Wombat",
+    "habitat": "Grassland",
+    "arrival_date": "2023-03-09",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 107,
+    "species": "Wombat",
+    "habitat": "Grassland",
+    "arrival_date": "2021-07-18",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 108,
+    "species": "Bat",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-11-03",
+    "health_status": "Fair",
+    "is_fed": true
+  },
+  {
+    "id": 109,
+    "species": "Bat",
+    "habitat": "Rainforest",
+    "arrival_date": "2024-05-12",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 110,
+    "species": "Mongoose",
+    "habitat": "Savannah",
+    "arrival_date": "2020-10-28",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 111,
+    "species": "Mongoose",
+    "habitat": "Savannah",
+    "arrival_date": "2022-06-14",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 112,
+    "species": "Armadillo",
+    "habitat": "Desert",
+    "arrival_date": "2023-09-21",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 113,
+    "species": "Armadillo",
+    "habitat": "Desert",
+    "arrival_date": "2021-04-07",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 114,
+    "species": "Porcupine",
+    "habitat": "Grassland",
+    "arrival_date": "2022-12-16",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 115,
+    "species": "Porcupine",
+    "habitat": "Grassland",
+    "arrival_date": "2020-08-23",
+    "health_status": "Poor",
+    "is_fed": true
+  },
+  {
+    "id": 116,
+    "species": "Hedgehog",
+    "habitat": "Grassland",
+    "arrival_date": "2023-05-11",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 117,
+    "species": "Hedgehog",
+    "habitat": "Grassland",
+    "arrival_date": "2021-09-19",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 118,
+    "species": "Emu",
+    "habitat": "Grassland",
+    "arrival_date": "2022-03-27",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 119,
+    "species": "Emu",
+    "habitat": "Grassland",
+    "arrival_date": "2024-06-08",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 120,
+    "species": "Peacock",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-12-30",
+    "health_status": "Fair",
+    "is_fed": true
+  },
+  {
+    "id": 121,
+    "species": "Peacock",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-07-04",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 122,
+    "species": "Swan",
+    "habitat": "Aquatic",
+    "arrival_date": "2023-10-15",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 123,
+    "species": "Swan",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-05-20",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 124,
+    "species": "Pelican",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-09-12",
+    "health_status": "Poor",
+    "is_fed": false
+  },
+  {
+    "id": 125,
+    "species": "Pelican",
+    "habitat": "Aquatic",
+    "arrival_date": "2020-04-18",
+    "health_status": "Fair",
+    "is_fed": true
+  },
+  {
+    "id": 126,
+    "species": "Lemur",
+    "habitat": "Rainforest",
+    "arrival_date": "2023-01-25",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 127,
+    "species": "Lemur",
+    "habitat": "Rainforest",
+    "arrival_date": "2021-08-13",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 128,
+    "species": "Tapir",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-04-09",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 129,
+    "species": "Tapir",
+    "habitat": "Rainforest",
+    "arrival_date": "2024-07-21",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 130,
+    "species": "Capybara",
+    "habitat": "Aquatic",
+    "arrival_date": "2020-11-26",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 131,
+    "species": "Capybara",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-10-08",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 132,
+    "species": "Lynx",
+    "habitat": "Mountain",
+    "arrival_date": "2023-06-03",
+    "health_status": "Poor",
+    "is_fed": true
+  },
+  {
+    "id": 133,
+    "species": "Lynx",
+    "habitat": "Mountain",
+    "arrival_date": "2021-02-17",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 134,
+    "species": "Bobcat",
+    "habitat": "Desert",
+    "arrival_date": "2022-08-29",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 135,
+    "species": "Bobcat",
+    "habitat": "Desert",
+    "arrival_date": "2024-03-14",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 136,
+    "species": "Gazelle",
+    "habitat": "Savannah",
+    "arrival_date": "2020-07-06",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 137,
+    "species": "Gazelle",
+    "habitat": "Savannah",
+    "arrival_date": "2022-12-22",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 138,
+    "species": "Wildebeest",
+    "habitat": "Savannah",
+    "arrival_date": "2023-04-17",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 139,
+    "species": "Wildebeest",
+    "habitat": "Savannah",
+    "arrival_date": "2021-10-05",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 140,
+    "species": "Buffalo",
+    "habitat": "Savannah",
+    "arrival_date": "2022-05-31",
+    "health_status": "Poor",
+    "is_fed": false
+  },
+  {
+    "id": 141,
+    "species": "Buffalo",
+    "habitat": "Grassland",
+    "arrival_date": "2020-09-24",
+    "health_status": "Fair",
+    "is_fed": true
+  },
+  {
+    "id": 142,
+    "species": "Ibex",
+    "habitat": "Mountain",
+    "arrival_date": "2023-11-19",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 143,
+    "species": "Ibex",
+    "habitat": "Mountain",
+    "arrival_date": "2021-06-28",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 144,
+    "species": "Macaw",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-02-13",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 145,
+    "species": "Macaw",
+    "habitat": "Rainforest",
+    "arrival_date": "2024-08-26",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 146,
+    "species": "Cockatoo",
+    "habitat": "Rainforest",
+    "arrival_date": "2020-05-09",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 147,
+    "species": "Cockatoo",
+    "habitat": "Rainforest",
+    "arrival_date": "2022-11-16",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 148,
+    "species": "Iguana",
+    "habitat": "Desert",
+    "arrival_date": "2023-07-23",
+    "health_status": "Poor",
+    "is_fed": true
+  },
+  {
+    "id": 149,
+    "species": "Iguana",
+    "habitat": "Desert",
+    "arrival_date": "2021-01-31",
+    "health_status": "Fair",
+    "is_fed": false
+  },
+  {
+    "id": 150,
+    "species": "Tortoise",
+    "habitat": "Desert",
+    "arrival_date": "2022-06-19",
+    "health_status": "Good",
+    "is_fed": true
+  },
+  {
+    "id": 151,
+    "species": "Tortoise",
+    "habitat": "Grassland",
+    "arrival_date": "2024-04-07",
+    "health_status": "Excellent",
+    "is_fed": false
+  },
+  {
+    "id": 152,
+    "species": "Condor",
+    "habitat": "Mountain",
+    "arrival_date": "2020-10-12",
+    "health_status": "Fair",
+    "is_fed": true
+  },
+  {
+    "id": 153,
+    "species": "Condor",
+    "habitat": "Mountain",
+    "arrival_date": "2023-02-28",
+    "health_status": "Good",
+    "is_fed": false
+  },
+  {
+    "id": 154,
+    "species": "Albatross",
+    "habitat": "Aquatic",
+    "arrival_date": "2021-12-05",
+    "health_status": "Excellent",
+    "is_fed": true
+  },
+  {
+    "id": 155,
+    "species": "Albatross",
+    "habitat": "Aquatic",
+    "arrival_date": "2022-09-20",
+    "health_status": "Poor",
+    "is_fed": false
   }
 ]
