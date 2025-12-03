@@ -84,13 +84,10 @@ namespace Zoo
 
             ClearValidationErrors();
 
-            List<string> errors = new List<string>();
-            bool isInputValid = ValidateAddAnimalInput(out id, out habitat, out healthStatus, errors);
+            bool isInputValid = ValidateAddAnimalInput(out id, out habitat, out healthStatus);
 
             if (!isInputValid)
             {
-                ValidationMessageTextBlock.Text = string.Join("\n", errors);
-                ValidationMessageTextBlock.Visibility = Visibility.Visible;
                 return;
             }
 
@@ -98,9 +95,10 @@ namespace Zoo
 
             if (idAlreadyExists)
             {
-                IdBorder.Style = (Style)FindResource("ErrorBorder");
-                ValidationMessageTextBlock.Text = "⚠ An animal with this ID already exists.";
-                ValidationMessageTextBlock.Visibility = Visibility.Visible;
+                IdTextBox.Style = (Style)FindResource("ErrorTextBox");
+                var idError = (TextBlock)FindName("IdErrorTextBlock");
+                idError.Text = "⚠ An animal with this ID already exists.";
+                idError.Visibility = Visibility.Visible;
                 return;
             }
 
@@ -125,16 +123,21 @@ namespace Zoo
 
         private void ClearValidationErrors()
         {
-            IdBorder.Style = null;
-            NameBorder.Style = null;
-            HabitatBorder.Style = null;
-            ArrivalDateBorder.Style = null;
-            HealthStatusBorder.Style = null;
-            ValidationMessageTextBlock.Visibility = Visibility.Collapsed;
+            IdTextBox.Style = null;
+            NameTextBox.Style = null;
+            HabitatComboBox.Style = null;
+            ArrivalDatePicker.Style = null;
+            HealthStatusComboBox.Style = null;
+            
+            ((TextBlock)FindName("IdErrorTextBlock")).Visibility = Visibility.Collapsed;
+            ((TextBlock)FindName("NameErrorTextBlock")).Visibility = Visibility.Collapsed;
+            ((TextBlock)FindName("HabitatErrorTextBlock")).Visibility = Visibility.Collapsed;
+            ((TextBlock)FindName("ArrivalDateErrorTextBlock")).Visibility = Visibility.Collapsed;
+            ((TextBlock)FindName("HealthStatusErrorTextBlock")).Visibility = Visibility.Collapsed;
         }
 
         //megnézi hogy a tökfilkó jó fajta adatot írt-e be
-        private bool ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus, List<string> errors)
+        private bool ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus)
         {
             id = 0;
             habitat = null;
@@ -145,40 +148,50 @@ namespace Zoo
             bool isIdValid = int.TryParse(IdTextBox.Text, out id);
             if (!isIdValid)
             {
-                IdBorder.Style = (Style)FindResource("ErrorBorder");
-                errors.Add("⚠ ID must be a valid number.");
+                IdTextBox.Style = (Style)FindResource("ErrorTextBox");
+                var idError = (TextBlock)FindName("IdErrorTextBlock");
+                idError.Text = "⚠ ID must be a valid number.";
+                idError.Visibility = Visibility.Visible;
                 isValid = false;
             }
 
             bool isNameEmpty = string.IsNullOrEmpty(NameTextBox.Text);
             if (isNameEmpty)
             {
-                NameBorder.Style = (Style)FindResource("ErrorBorder");
-                errors.Add("⚠ Name (Species) is required.");
+                NameTextBox.Style = (Style)FindResource("ErrorTextBox");
+                var nameError = (TextBlock)FindName("NameErrorTextBlock");
+                nameError.Text = "⚠ Name (Species) is required.";
+                nameError.Visibility = Visibility.Visible;
                 isValid = false;
             }
 
             habitat = GetComboBoxValue(HabitatComboBox);
             if (habitat == null)
             {
-                HabitatBorder.Style = (Style)FindResource("ErrorBorder");
-                errors.Add("⚠ Please select a Habitat.");
+                HabitatComboBox.Style = (Style)FindResource("ErrorComboBox");
+                var habitatError = (TextBlock)FindName("HabitatErrorTextBlock");
+                habitatError.Text = "⚠ Please select a Habitat.";
+                habitatError.Visibility = Visibility.Visible;
                 isValid = false;
             }
 
             bool isDateSelected = ArrivalDatePicker.SelectedDate != null;
             if (!isDateSelected)
             {
-                ArrivalDateBorder.Style = (Style)FindResource("ErrorBorder");
-                errors.Add("⚠ Arrival Date is required.");
+                ArrivalDatePicker.Style = (Style)FindResource("ErrorDatePicker");
+                var dateError = (TextBlock)FindName("ArrivalDateErrorTextBlock");
+                dateError.Text = "⚠ Arrival Date is required.";
+                dateError.Visibility = Visibility.Visible;
                 isValid = false;
             }
 
             healthStatus = GetComboBoxValue(HealthStatusComboBox);
             if (healthStatus == null)
             {
-                HealthStatusBorder.Style = (Style)FindResource("ErrorBorder");
-                errors.Add("⚠ Please select a Health Status.");
+                HealthStatusComboBox.Style = (Style)FindResource("ErrorComboBox");
+                var healthError = (TextBlock)FindName("HealthStatusErrorTextBlock");
+                healthError.Text = "⚠ Please select a Health Status.";
+                healthError.Visibility = Visibility.Visible;
                 isValid = false;
             }
 

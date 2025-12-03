@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Zoo Manager" Height="800" Width="1100" MinHeight="650" MinWidth="900"
         FontFamily="Segoe UI">
+    <!-- Updated validation system -->
     <Window.Resources>
         <!--ez a szegmens adja a háttérdesign-t. Tudja tököm hogy működik de legalább jól néz ki. (Elnézést tanár úr)-->
         <DrawingBrush x:Key="CamoBackground" TileMode="Tile" Viewport="0,0,200,200" ViewportUnits="Absolute">
@@ -223,6 +224,22 @@
             </Setter>
         </Style>
         
+        <!-- Error styles for controls -->
+        <Style x:Key="ErrorTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="BorderBrush" Value="#D32F2F"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
+        <Style x:Key="ErrorComboBox" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="BorderBrush" Value="#D32F2F"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
+        <Style x:Key="ErrorDatePicker" TargetType="DatePicker" BasedOn="{StaticResource {x:Type DatePicker}}">
+            <Setter Property="BorderBrush" Value="#D32F2F"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
         <DataTemplate x:Key="ExpanderHeader">
             <TextBlock Text="{Binding}" Foreground="#2E5016" FontSize="17" FontWeight="Bold"/>
         </DataTemplate>
@@ -249,12 +266,13 @@
         </Style>
         
         <Style TargetType="DatePicker">
-            <Setter Property="Height" Value="34"/>
-            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="8,5"/>
             <Setter Property="BorderBrush" Value="#8B9B6B"/>
             <Setter Property="BorderThickness" Value="1.5"/>
             <Setter Property="Margin" Value="0,6,0,0"/>
             <Setter Property="Background" Value="White"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         
         <Style TargetType="CheckBox">
@@ -343,10 +361,6 @@
                           HeaderTemplate="{StaticResource ExpanderHeader}" IsExpanded="False">
                     <Border Style="{StaticResource ContentBorder}">
                         <StackPanel>
-                            <!-- hibaüzenetek helye, reméljük nem kell használni -->
-                            <TextBlock x:Name="ValidationMessageTextBlock" Foreground="#C62828" FontWeight="SemiBold" 
-                                       Margin="0,0,0,12" Visibility="Collapsed"/>
-                            
                             <!-- űrlap mezők 3 oszlopban mert így menő -->
                             <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
@@ -362,54 +376,54 @@
                                 <!-- ID mező -->
                                 <StackPanel Margin="0,0,12,16">
                                     <TextBlock Text="ID" Style="{StaticResource LabelText}"/>
-                                    <Border x:Name="IdBorder">
-                                        <TextBox x:Name="IdTextBox"/>
-                                    </Border>
+                                    <TextBox x:Name="IdTextBox"/>
+                                    <TextBlock x:Name="IdErrorTextBlock" Foreground="#C62828" FontSize="10" 
+                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                                 </StackPanel>
 
                                 <!-- név/fajta -->
                                 <StackPanel Grid.Column="1" Margin="6,0,6,16">
                                     <TextBlock Text="Name (Species)" Style="{StaticResource LabelText}"/>
-                                    <Border x:Name="NameBorder">
-                                        <TextBox x:Name="NameTextBox"/>
-                                    </Border>
+                                    <TextBox x:Name="NameTextBox"/>
+                                    <TextBlock x:Name="NameErrorTextBlock" Foreground="#C62828" FontSize="10" 
+                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                                 </StackPanel>
 
                                 <!-- élőhely választó -->
                                 <StackPanel Grid.Column="2" Margin="12,0,0,16">
                                     <TextBlock Text="Habitat" Style="{StaticResource LabelText}"/>
-                                    <Border x:Name="HabitatBorder">
-                                        <ComboBox x:Name="HabitatComboBox">
-                                            <ComboBoxItem Content="Savannah"/>
-                                            <ComboBoxItem Content="Rainforest"/>
-                                            <ComboBoxItem Content="Desert"/>
-                                            <ComboBoxItem Content="Aquatic"/>
-                                            <ComboBoxItem Content="Mountain"/>
-                                            <ComboBoxItem Content="Grassland"/>
-                                            <ComboBoxItem Content="Arctic"/>
-                                        </ComboBox>
-                                    </Border>
+                                    <ComboBox x:Name="HabitatComboBox">
+                                        <ComboBoxItem Content="Savannah"/>
+                                        <ComboBoxItem Content="Rainforest"/>
+                                        <ComboBoxItem Content="Desert"/>
+                                        <ComboBoxItem Content="Aquatic"/>
+                                        <ComboBoxItem Content="Mountain"/>
+                                        <ComboBoxItem Content="Grassland"/>
+                                        <ComboBoxItem Content="Arctic"/>
+                                    </ComboBox>
+                                    <TextBlock x:Name="HabitatErrorTextBlock" Foreground="#C62828" FontSize="10" 
+                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                                 </StackPanel>
 
                                 <!-- érkezés dátuma -->
                                 <StackPanel Grid.Row="1" Margin="0,0,12,0">
                                     <TextBlock Text="Arrival Date" Style="{StaticResource LabelText}"/>
-                                    <Border x:Name="ArrivalDateBorder">
-                                        <DatePicker x:Name="ArrivalDatePicker"/>
-                                    </Border>
+                                    <DatePicker x:Name="ArrivalDatePicker"/>
+                                    <TextBlock x:Name="ArrivalDateErrorTextBlock" Foreground="#C62828" FontSize="10" 
+                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                                 </StackPanel>
 
                                 <!-- egészségügyi állapot -->
                                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="6,0,6,0">
                                     <TextBlock Text="Health Status" Style="{StaticResource LabelText}"/>
-                                    <Border x:Name="HealthStatusBorder">
-                                        <ComboBox x:Name="HealthStatusComboBox">
-                                            <ComboBoxItem Content="Excellent" IsSelected="True"/>
-                                            <ComboBoxItem Content="Good"/>
-                                            <ComboBoxItem Content="Fair"/>
-                                            <ComboBoxItem Content="Poor"/>
-                                        </ComboBox>
-                                    </Border>
+                                    <ComboBox x:Name="HealthStatusComboBox">
+                                        <ComboBoxItem Content="Excellent" IsSelected="True"/>
+                                        <ComboBoxItem Content="Good"/>
+                                        <ComboBoxItem Content="Fair"/>
+                                        <ComboBoxItem Content="Poor"/>
+                                    </ComboBox>
+                                    <TextBlock x:Name="HealthStatusErrorTextBlock" Foreground="#C62828" FontSize="10" 
+                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
                                 </StackPanel>
 
                                 <!-- etetési státusz -->
@@ -577,7 +591,7 @@
 
                                     <StackPanel Grid.Row="3" Margin="0,0,0,8">
                                         <TextBlock Text="Arrival Date" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <DatePicker x:Name="ModifyArrivalDatePicker" Height="30" FontSize="11" Margin="0,4,0,0"/>
+                                        <DatePicker x:Name="ModifyArrivalDatePicker" Height="32" FontSize="12" Margin="0,4,0,0"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="4" Margin="0,0,0,8">
