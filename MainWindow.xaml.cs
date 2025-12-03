@@ -61,14 +61,14 @@ namespace Zoo
             List<Animal> loadedAnimals = JsonSerializer.Deserialize<List<Animal>>(json);
 
             if (loadedAnimals != null)
-            {animalsList = loadedAnimals;}
+            { animalsList = loadedAnimals; }
             else
-            {animalsList = new List<Animal>();}
+            { animalsList = new List<Animal>(); }
         }
 
         //ez a 2 a komment alatt a mentéshez kell
         private JsonSerializerOptions GetJsonOptions()
-        { return new JsonSerializerOptions { WriteIndented = true };}
+        { return new JsonSerializerOptions { WriteIndented = true }; }
         private void SaveAnimals()
         {
             string json = JsonSerializer.Serialize(animalsList, GetJsonOptions());
@@ -82,17 +82,27 @@ namespace Zoo
             string habitat;
             string healthStatus;
 
-            bool isInputValid = ValidateAddAnimalInput(out id, out habitat, out healthStatus);
+            ClearValidationErrors();
+
+            List<string> errors = new List<string>();
+            bool isInputValid = ValidateAddAnimalInput(out id, out habitat, out healthStatus, errors);
 
             if (!isInputValid)
-            {MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;}
+            {
+                ValidationMessageTextBlock.Text = string.Join("\n", errors);
+                ValidationMessageTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
 
             bool idAlreadyExists = animalsList.Any(a => a.id == id);
 
             if (idAlreadyExists)
-            {MessageBox.Show("An animal with this ID already exists.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;}
+            {
+                IdBorder.Style = (Style)FindResource("ErrorBorder");
+                ValidationMessageTextBlock.Text = "⚠ An animal with this ID already exists.";
+                ValidationMessageTextBlock.Visibility = Visibility.Visible;
+                return;
+            }
 
             var newAnimal = new Animal();
             newAnimal.id = id;
@@ -110,23 +120,67 @@ namespace Zoo
             ClearAddAnimalForm();
             UpdateSearchResults();
         }
-        private bool ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus)
+
+        private void ClearValidationErrors()
+        {
+            IdBorder.Style = null;
+            NameBorder.Style = null;
+            HabitatBorder.Style = null;
+            ArrivalDateBorder.Style = null;
+            HealthStatusBorder.Style = null;
+            ValidationMessageTextBlock.Visibility = Visibility.Collapsed;
+        }
+
+        //megnézi hogy a tökfilkó jó fajta adatot írt-e be
+        private bool ValidateAddAnimalInput(out int id, out string habitat, out string healthStatus, List<string> errors)
         {
             id = 0;
             habitat = null;
             healthStatus = null;
 
-            bool isIdValid = int.TryParse(IdTextBox.Text, out id);
-            bool isNameEmpty = string.IsNullOrEmpty(NameTextBox.Text);
-            bool isDateSelected = ArrivalDatePicker.SelectedDate != null;
+            bool isValid = true;
 
-            if (!isIdValid || isNameEmpty || !isDateSelected)
-            { return false; }
+            bool isIdValid = int.TryParse(IdTextBox.Text, out id);
+            if (!isIdValid)
+            {
+                IdBorder.Style = (Style)FindResource("ErrorBorder");
+                errors.Add("⚠ ID must be a valid number.");
+                isValid = false;
+            }
+
+            bool isNameEmpty = string.IsNullOrEmpty(NameTextBox.Text);
+            if (isNameEmpty)
+            {
+                NameBorder.Style = (Style)FindResource("ErrorBorder");
+                errors.Add("⚠ Name (Species) is required.");
+                isValid = false;
+            }
 
             habitat = GetComboBoxValue(HabitatComboBox);
-            healthStatus = GetComboBoxValue(HealthStatusComboBox);
+            if (habitat == null)
+            {
+                HabitatBorder.Style = (Style)FindResource("ErrorBorder");
+                errors.Add("⚠ Please select a Habitat.");
+                isValid = false;
+            }
 
-            return habitat != null && healthStatus != null;
+            bool isDateSelected = ArrivalDatePicker.SelectedDate != null;
+            if (!isDateSelected)
+            {
+                ArrivalDateBorder.Style = (Style)FindResource("ErrorBorder");
+                errors.Add("⚠ Arrival Date is required.");
+                isValid = false;
+            }
+
+            healthStatus = GetComboBoxValue(HealthStatusComboBox);
+            if (healthStatus == null)
+            {
+                HealthStatusBorder.Style = (Style)FindResource("ErrorBorder");
+                errors.Add("⚠ Please select a Health Status.");
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         //űrlap tisztítása hozzáadás után
@@ -138,6 +192,7 @@ namespace Zoo
             ArrivalDatePicker.SelectedDate = null;
             HealthStatusComboBox.SelectedIndex = 0;
             IsFedCheckBox.IsChecked = true;
+            ClearValidationErrors();
         }
 
         //kereséshez szükséges részek
@@ -159,16 +214,20 @@ namespace Zoo
             bool isSearchByFed = SearchByFedRadio.IsChecked == true;
 
             if (isSearchById || isSearchBySpecies)
-            {SearchTextBox.Visibility = Visibility.Visible;
-            SearchTextBox.Text = string.Empty;}
+            {
+                SearchTextBox.Visibility = Visibility.Visible;
+                SearchTextBox.Text = string.Empty;
+            }
             else if (isSearchByHabitat)
-            {SetupHabitatSearchComboBox();}
+            { SetupHabitatSearchComboBox(); }
             else if (isSearchByHealth)
-            {SetupHealthSearchComboBox();}
+            { SetupHealthSearchComboBox(); }
             else if (isSearchByFed)
-            {SearchFedCheckBox.Visibility = Visibility.Visible;
-            SearchFedCheckBox.IsChecked = false;
-            UpdateSearchResults();}
+            {
+                SearchFedCheckBox.Visibility = Visibility.Visible;
+                SearchFedCheckBox.IsChecked = false;
+                UpdateSearchResults();
+            }
         }
         private void HideAllSearchInputs()
         {
@@ -179,45 +238,51 @@ namespace Zoo
 
         //kereséshez szükséges combobox(ok) feltöltése
         private void SetupHabitatSearchComboBox()
-        {SetupSearchComboBox(new[] { "All", "Savannah", "Rainforest", "Desert", "Aquatic", "Mountain", "Grassland", "Arctic" });}
+        { SetupSearchComboBox(new[] { "All", "Savannah", "Rainforest", "Desert", "Aquatic", "Mountain", "Grassland", "Arctic" }); }
         private void SetupHealthSearchComboBox()
-        {SetupSearchComboBox(new[] { "All", "Excellent", "Good", "Fair", "Poor" });}
+        { SetupSearchComboBox(new[] { "All", "Excellent", "Good", "Fair", "Poor" }); }
         private void SetupSearchComboBox(string[] items)
         {
             SearchComboBox.Visibility = Visibility.Visible;
             SearchComboBox.Items.Clear();
 
             foreach (string item in items)
-            {ComboBoxItem comboBoxItem = new ComboBoxItem();
-            comboBoxItem.Content = item;
-            SearchComboBox.Items.Add(comboBoxItem);}
+            {
+                ComboBoxItem comboBoxItem = new ComboBoxItem();
+                comboBoxItem.Content = item;
+                SearchComboBox.Items.Add(comboBoxItem);
+            }
 
             SearchComboBox.SelectedIndex = 0;
         }
 
         //keresés eseménykezelők (tudom nagyon elegáns)
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {UpdateSearchResults();}
+        { UpdateSearchResults(); }
 
         private void SearchComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {UpdateSearchResults();}
+        { UpdateSearchResults(); }
 
         private void SearchFedCheckBox_Changed(object sender, RoutedEventArgs e)
-        {UpdateSearchResults();}
+        { UpdateSearchResults(); }
 
         //rendezés eseménykezelők
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {UpdateSearchResults();}
+        { UpdateSearchResults(); }
         private void SortOrderButton_Click(object sender, RoutedEventArgs e)
         {
             isAscending = !isAscending;
 
             if (isAscending)
-            {SortOrderButton.Content = "⬆";
-            SortOrderButton.ToolTip = "Ascending";}
+            {
+                SortOrderButton.Content = "⬆";
+                SortOrderButton.ToolTip = "Ascending";
+            }
             else
-            {SortOrderButton.Content = "⬇";
-            SortOrderButton.ToolTip = "Descending";}
+            {
+                SortOrderButton.Content = "⬇";
+                SortOrderButton.ToolTip = "Descending";
+            }
 
             UpdateSearchResults();
         }
@@ -226,7 +291,7 @@ namespace Zoo
         private void UpdateSearchResults()
         {
             if (SearchResultsListBox == null)
-            {return;}
+            { return; }
 
             List<Animal> results = GetFilteredAnimals();
             List<Animal> sortedResults = ApplySorting(results);
@@ -256,7 +321,7 @@ namespace Zoo
                 foreach (Animal animal in animalsList)
                 {
                     if (animal.id == searchId)
-                    { matchingAnimals.Add(animal);}
+                    { matchingAnimals.Add(animal); }
                 }
                 return matchingAnimals;
             }
@@ -276,17 +341,17 @@ namespace Zoo
                 bool containsSearchText = speciesLower.Contains(searchTextLower);
 
                 if (containsSearchText)
-                {matchingAnimals.Add(animal);}
+                { matchingAnimals.Add(animal); }
             }
 
             return matchingAnimals;
         }
 
         private List<Animal> FilterByHabitat()
-        {return FilterByComboBoxSelection(a => a.habitat);}
+        { return FilterByComboBoxSelection(a => a.habitat); }
 
         private List<Animal> FilterByHealth()
-        {return FilterByComboBoxSelection(a => a.health_status);}
+        { return FilterByComboBoxSelection(a => a.health_status); }
 
         private List<Animal> FilterByComboBoxSelection(Func<Animal, string> propertySelector)
         {
@@ -296,13 +361,13 @@ namespace Zoo
                 string selectedValue = selectedItem.Content.ToString();
 
                 if (selectedValue == "All")
-                {return animalsList.ToList();}
+                { return animalsList.ToList(); }
 
                 List<Animal> matchingAnimals = new List<Animal>();
                 foreach (Animal animal in animalsList)
                 {
                     if (propertySelector(animal) == selectedValue)
-                    {matchingAnimals.Add(animal);}
+                    { matchingAnimals.Add(animal); }
                 }
                 return matchingAnimals;
             }
@@ -318,7 +383,7 @@ namespace Zoo
             foreach (Animal animal in animalsList)
             {
                 if (animal.is_fed == showFed)
-                {matchingAnimals.Add(animal);}
+                { matchingAnimals.Add(animal); }
             }
             return matchingAnimals;
         }
@@ -328,7 +393,7 @@ namespace Zoo
         {
             bool sortingNotReady = SortComboBox == null || SortComboBox.SelectedIndex == -1;
             if (sortingNotReady)
-            {return animalsList;}
+            { return animalsList; }
 
             int selectedSortOption = SortComboBox.SelectedIndex;
             List<Animal> sortedList = new List<Animal>();
@@ -336,33 +401,33 @@ namespace Zoo
             if (selectedSortOption == 0) // ID szerint 
             {
                 if (isAscending)
-                {sortedList = animalsList.OrderBy(a => a.id).ToList();}
+                { sortedList = animalsList.OrderBy(a => a.id).ToList(); }
                 else
-                {sortedList = animalsList.OrderByDescending(a => a.id).ToList();}
+                { sortedList = animalsList.OrderByDescending(a => a.id).ToList(); }
             }
             else if (selectedSortOption == 1) // Fajta szerint
             {
                 if (isAscending)
-                {sortedList = animalsList.OrderBy(a => a.species).ToList();}
+                { sortedList = animalsList.OrderBy(a => a.species).ToList(); }
                 else
-                {sortedList = animalsList.OrderByDescending(a => a.species).ToList();}
+                { sortedList = animalsList.OrderByDescending(a => a.species).ToList(); }
             }
             else if (selectedSortOption == 2) // Élőhely szerint
             {
                 if (isAscending)
-                {sortedList = animalsList.OrderBy(a => a.habitat).ToList();}
+                { sortedList = animalsList.OrderBy(a => a.habitat).ToList(); }
                 else
-                { sortedList = animalsList.OrderByDescending(a => a.habitat).ToList();}
+                { sortedList = animalsList.OrderByDescending(a => a.habitat).ToList(); }
             }
             else if (selectedSortOption == 3) // megérkezés dátum szerint
             {
                 if (isAscending)
-                {sortedList = animalsList.OrderBy(a => a.arrival_date).ToList();}
+                { sortedList = animalsList.OrderBy(a => a.arrival_date).ToList(); }
                 else
-                {sortedList = animalsList.OrderByDescending(a => a.arrival_date).ToList();}
+                { sortedList = animalsList.OrderByDescending(a => a.arrival_date).ToList(); }
             }
             else
-            {sortedList = animalsList;}
+            { sortedList = animalsList; }
             return sortedList;
         }
 
@@ -372,7 +437,7 @@ namespace Zoo
         {
             Animal selectedAnimalFromList = SearchResultsListBox.SelectedItem as Animal;
             if (selectedAnimalFromList != null)
-            {LoadAnimalForModification(selectedAnimalFromList);}
+            { LoadAnimalForModification(selectedAnimalFromList); }
         }
 
         private void LoadAnimalForModification(Animal animal)
@@ -385,9 +450,9 @@ namespace Zoo
             DateTime arrivalDate;
             bool isParsed = DateTime.TryParse(animal.arrival_date, out arrivalDate);
             if (isParsed)
-            {ModifyArrivalDatePicker.SelectedDate = arrivalDate;}
+            { ModifyArrivalDatePicker.SelectedDate = arrivalDate; }
             else
-            {ModifyArrivalDatePicker.SelectedDate = null;}
+            { ModifyArrivalDatePicker.SelectedDate = null; }
 
             ModifyIsFedCheckBox.IsChecked = animal.is_fed;
 
@@ -410,8 +475,10 @@ namespace Zoo
                     string itemContent = comboBoxItem.Content.ToString();
 
                     if (itemContent == value)
-                    {comboBox.SelectedItem = comboBoxItem;
-                    break;}
+                    {
+                        comboBox.SelectedItem = comboBoxItem;
+                        break;
+                    }
                 }
             }
         }
@@ -419,21 +486,26 @@ namespace Zoo
         private void ModifyButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
-            {MessageBox.Show("No animal selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
+            {
+                MessageBox.Show("No animal selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             bool isInputValid = ValidateModifyInput();
 
             if (!isInputValid)
-            {MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;}
+            {
+                MessageBox.Show("Please fill in all fields correctly.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             UpdateSelectedAnimal();
             SaveAnimals();
             MessageBox.Show("Animal updated successfully.", "Success");
             UpdateSearchResults();
-            ClearModifyForm();
+
+            // Re-load the modified animal to show updated values
+            LoadAnimalForModification(selectedAnimal);
         }
 
         //módosítás ellenőrzése
@@ -462,8 +534,8 @@ namespace Zoo
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
-            {MessageBox.Show("No animal selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return;
+            {
+                MessageBox.Show("No animal selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error); return;
             }
 
             string confirmationMessage = $"Are you sure you want to delete animal ID {selectedAnimal.id} ({selectedAnimal.species})?";
@@ -483,13 +555,7 @@ namespace Zoo
         //törlés v. módosítás után lenullázza az űrlapot
         private void ClearModifyForm()
         {
-            selectedAnimal = null;
-            ModifyIdTextBox.Text = string.Empty;
-            ModifyNameTextBox.Text = string.Empty;
-            ModifyHabitatComboBox.SelectedIndex = -1;
-            ModifyHealthStatusComboBox.SelectedIndex = -1;
-            ModifyArrivalDatePicker.SelectedDate = null;
-            ModifyIsFedCheckBox.IsChecked = false;
+            selectedAnimal = null; ModifyIdTextBox.Text = string.Empty; ModifyNameTextBox.Text = string.Empty; ModifyHabitatComboBox.SelectedIndex = -1; ModifyHealthStatusComboBox.SelectedIndex = -1; ModifyArrivalDatePicker.SelectedDate = null; ModifyIsFedCheckBox.IsChecked = false;
 
             ModifyGrid.IsEnabled = false;
             ModifyButton.IsEnabled = false;
@@ -500,12 +566,14 @@ namespace Zoo
         //exportálás és annak csodálatos functionjei
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Animal> dataToExport = GetExportData();
+            IEnumerable<Animal> searchResults = SearchResultsListBox.ItemsSource as IEnumerable<Animal>;
+            List<Animal> dataToExport = searchResults?.ToList() ?? new List<Animal>();
 
             bool hasNoData = dataToExport.Count == 0;
             if (hasNoData)
-            {MessageBox.Show("No data to export.", "No Data", MessageBoxButton.OK, MessageBoxImage.Information);
-            return;
+            {
+                MessageBox.Show("No data to export.", "No Data", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -522,9 +590,6 @@ namespace Zoo
             {
                 try
                 {
-                    JsonSerializerOptions options = new JsonSerializerOptions();
-                    options.WriteIndented = true;
-
                     string json = JsonSerializer.Serialize(dataToExport, GetJsonOptions());
                     File.WriteAllText(saveFileDialog.FileName, json);
 
@@ -537,22 +602,6 @@ namespace Zoo
                     MessageBox.Show(errorMessage, "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-
-        private List<Animal> GetExportData()
-        {
-            bool shouldExportSearchResults = ExportSearchRadio.IsChecked == true;
-
-            if (shouldExportSearchResults)
-            {
-                IEnumerable<Animal> searchResults = SearchResultsListBox.ItemsSource as IEnumerable<Animal>;
-
-                if (searchResults != null)
-                {return searchResults.ToList();}
-
-                return new List<Animal>();
-            }
-            return animalsList.ToList();
         }
 
         private string GetComboBoxValue(ComboBox comboBox)
