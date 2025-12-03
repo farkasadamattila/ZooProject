@@ -527,8 +527,7 @@ namespace Zoo
             RefreshSearchComboBoxIfNeeded();
             UpdateSearchResults();
 
-            // Re-load the modified animal to show updated values
-            LoadAnimalForModification(selectedAnimal);
+            LoadAnimalForModification(selectedAnimal); //frissíti a módosított adatokat az űrlapon
         }
 
         //módosítás ellenőrzése
@@ -587,7 +586,7 @@ namespace Zoo
             DeleteButton.IsEnabled = false;
         }
 
-        //Refresh the search dropdown when species changes
+        //frissíti a kereső comboboxot ha szükséges (pl. módosítás vagy törlés után)
         private void RefreshSearchComboBoxIfNeeded()
         {
             bool isSearchBySpecies = SearchBySpeciesRadio.IsChecked == true;
@@ -595,8 +594,8 @@ namespace Zoo
             {
                 object currentSelection = SearchComboBox.SelectedItem;
                 SetupSpeciesSearchComboBox();
-                
-                // Try to maintain the previous selection if it still exists
+
+                // próbálja visszaállítani a korábbi kiválasztást
                 if (currentSelection != null)
                 {
                     string previousValue = (currentSelection as ComboBoxItem)?.Content.ToString();
@@ -609,8 +608,8 @@ namespace Zoo
                         }
                     }
                 }
-                
-                // If previous selection doesn't exist anymore, default to "All"
+
+                // ha nem találta meg, állítsa az első elemre
                 SearchComboBox.SelectedIndex = 0;
             }
         }
