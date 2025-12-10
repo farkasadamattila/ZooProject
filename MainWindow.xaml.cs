@@ -407,7 +407,6 @@ namespace Zoo
             }
             return animalsList.ToList();
         }
-
         private List<Animal> FilterByFedStatus()
         {
             bool showFed = SearchFedCheckBox.IsChecked ?? false;
