@@ -12,14 +12,12 @@
         <DrawingBrush x:Key="CamoBackground" TileMode="Tile" Viewport="0,0,200,200" ViewportUnits="Absolute">
             <DrawingBrush.Drawing>
                 <DrawingGroup>
-                    <!-- alap réteg, mert kell valami amiből elindulunk -->
                     <GeometryDrawing Brush="#5C6B3C">
                         <GeometryDrawing.Geometry>
                             <RectangleGeometry Rect="0,0,200,200"/>
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
                     
-                    <!-- nagy foltok, mert a camo az ilyen -->
                     <GeometryDrawing Brush="#4A5A2F">
                         <GeometryDrawing.Geometry>
                             <PathGeometry>
@@ -59,7 +57,6 @@
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
                     
-                    <!-- kisebb foltok a részletekért -->
                     <GeometryDrawing Brush="#394426">
                         <GeometryDrawing.Geometry>
                             <PathGeometry>
@@ -99,7 +96,6 @@
                         </GeometryDrawing.Geometry>
                     </GeometryDrawing>
                     
-                    <!-- sötét pöttyök mert miért ne -->
                     <GeometryDrawing Brush="#2E3A1F">
                         <GeometryDrawing.Geometry>
                             <EllipseGeometry Center="45,65" RadiusX="12" RadiusY="10"/>
@@ -144,7 +140,7 @@
             </Border>
         </DataTemplate>
         
-        <!-- modern gombok stílus, mert az alap csúnya  -->
+        <!-- modern gombok stílus  -->
         <Style x:Key="ModernButton" TargetType="Button">
             <Setter Property="Padding" Value="16,8"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -242,7 +238,80 @@
             <TextBlock Text="{Binding}" Foreground="#2E5016" FontSize="17" FontWeight="Bold"/>
         </DataTemplate>
         
-        <!-- globális stílusok mindenféle kontrollhoz, hogy ne kelljen mindenhol külön beállítani -->
+        <Style x:Key="FormInputStackPanel" TargetType="StackPanel">
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+     
+        <Style x:Key="SmallLabelText" TargetType="TextBlock" BasedOn="{StaticResource LabelText}">
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+        <Style x:Key="ErrorMessageText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#C62828"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        
+        <Style x:Key="SectionHeaderBorder" TargetType="Border">
+            <Setter Property="Background" Value="#6B7C4A"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="10,6"/>
+        </Style>
+        
+        <Style x:Key="SmallSectionTitleWhite" TargetType="TextBlock" BasedOn="{StaticResource SectionTitle}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style x:Key="SmallTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+        
+        <Style x:Key="SmallComboBox" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+        
+        <Style x:Key="SmallDatePicker" TargetType="DatePicker" BasedOn="{StaticResource {x:Type DatePicker}}">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+        
+        <Style x:Key="SearchControl" TargetType="Control">
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+        <Style x:Key="SearchTextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+        <Style x:Key="SearchComboBox" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        
+        <Style x:Key="SearchCheckBox" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+        
+        <Style x:Key="SmallRadioButton" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="34"/>
             <Setter Property="Padding" Value="10,6"/>
@@ -336,7 +405,7 @@
                            Foreground="#C5D9B5" HorizontalAlignment="Center" Margin="0,3,0,0"/>
             </StackPanel>
             
-            <!-- óra mert fancy -->
+            <!-- óra -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,30,0">
                 <TextBlock Text="🕐" FontSize="22" VerticalAlignment="Center" Margin="0,0,8,0"/>
                 <TextBlock x:Name="ClockTextBlock" FontSize="20" FontWeight="Bold" 
@@ -369,23 +438,21 @@
                                 </Grid.RowDefinitions>
 
                                 <!-- ID mező -->
-                                <StackPanel Margin="0,0,12,16">
+                                <StackPanel Margin="0,0,12,16" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="ID" Style="{StaticResource LabelText}"/>
                                     <TextBox x:Name="IdTextBox"/>
-                                    <TextBlock x:Name="IdErrorTextBlock" Foreground="#C62828" FontSize="10" 
-                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+                                    <TextBlock x:Name="IdErrorTextBlock" Style="{StaticResource ErrorMessageText}"/>
                                 </StackPanel>
 
                                 <!-- név/fajta -->
-                                <StackPanel Grid.Column="1" Margin="6,0,6,16">
+                                <StackPanel Grid.Column="1" Margin="6,0,6,16" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="Name (Species)" Style="{StaticResource LabelText}"/>
                                     <TextBox x:Name="NameTextBox"/>
-                                    <TextBlock x:Name="NameErrorTextBlock" Foreground="#C62828" FontSize="10" 
-                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+                                    <TextBlock x:Name="NameErrorTextBlock" Style="{StaticResource ErrorMessageText}"/>
                                 </StackPanel>
 
                                 <!-- élőhely választó -->
-                                <StackPanel Grid.Column="2" Margin="12,0,0,16">
+                                <StackPanel Grid.Column="2" Margin="12,0,0,16" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="Habitat" Style="{StaticResource LabelText}"/>
                                     <ComboBox x:Name="HabitatComboBox">
                                         <ComboBoxItem Content="Savannah"/>
@@ -396,20 +463,18 @@
                                         <ComboBoxItem Content="Grassland"/>
                                         <ComboBoxItem Content="Arctic"/>
                                     </ComboBox>
-                                    <TextBlock x:Name="HabitatErrorTextBlock" Foreground="#C62828" FontSize="10" 
-                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+                                    <TextBlock x:Name="HabitatErrorTextBlock" Style="{StaticResource ErrorMessageText}"/>
                                 </StackPanel>
 
                                 <!-- érkezés dátuma -->
-                                <StackPanel Grid.Row="1" Margin="0,0,12,0">
+                                <StackPanel Grid.Row="1" Margin="0,0,12,0" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="Arrival Date" Style="{StaticResource LabelText}"/>
                                     <DatePicker x:Name="ArrivalDatePicker"/>
-                                    <TextBlock x:Name="ArrivalDateErrorTextBlock" Foreground="#C62828" FontSize="10" 
-                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+                                    <TextBlock x:Name="ArrivalDateErrorTextBlock" Style="{StaticResource ErrorMessageText}"/>
                                 </StackPanel>
 
                                 <!-- egészségügyi állapot -->
-                                <StackPanel Grid.Row="1" Grid.Column="1" Margin="6,0,6,0">
+                                <StackPanel Grid.Row="1" Grid.Column="1" Margin="6,0,6,0" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="Health Status" Style="{StaticResource LabelText}"/>
                                     <ComboBox x:Name="HealthStatusComboBox">
                                         <ComboBoxItem Content="Excellent" IsSelected="True"/>
@@ -417,12 +482,11 @@
                                         <ComboBoxItem Content="Fair"/>
                                         <ComboBoxItem Content="Poor"/>
                                     </ComboBox>
-                                    <TextBlock x:Name="HealthStatusErrorTextBlock" Foreground="#C62828" FontSize="10" 
-                                               Margin="0,2,0,0" Visibility="Collapsed" TextWrapping="Wrap"/>
+                                    <TextBlock x:Name="HealthStatusErrorTextBlock" Style="{StaticResource ErrorMessageText}"/>
                                 </StackPanel>
 
                                 <!-- etetési státusz -->
-                                <StackPanel Grid.Row="1" Grid.Column="2" Margin="12,0,0,0">
+                                <StackPanel Grid.Row="1" Grid.Column="2" Margin="12,0,0,0" Style="{StaticResource FormInputStackPanel}">
                                     <TextBlock Text="Feeding Status" Style="{StaticResource LabelText}"/>
                                     <CheckBox x:Name="IsFedCheckBox" Content="Is Fed" Margin="0,10,0,0" IsChecked="True"/>
                                 </StackPanel>
@@ -450,12 +514,11 @@
                             
                             <!-- bal oldal: keresés -->
                             <StackPanel>
-                                <Border Background="#6B7C4A" CornerRadius="8" Padding="10,6" Margin="0,0,0,12">
-                                    <TextBlock Text="Search Criteria" Style="{StaticResource SectionTitle}" 
-                                               FontSize="14" Margin="0" Foreground="White"/>
+                                <Border Style="{StaticResource SectionHeaderBorder}" Margin="0,0,0,12">
+                                    <TextBlock Text="Search Criteria" Style="{StaticResource SmallSectionTitleWhite}"/>
                                 </Border>
                                 
-                                <!-- keresési opciók, elég sok van -->
+                                <!-- keresési opciók -->
                                 <Grid Margin="0,0,0,16">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -463,28 +526,33 @@
                                     </Grid.RowDefinitions>
                                     
                                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                                        <RadioButton x:Name="SearchByIdRadio" Content="ID" GroupName="SearchType" FontSize="12"
-                                                     Margin="0,0,20,0" IsChecked="True" Checked="SearchRadio_Checked"/>
-                                        <RadioButton x:Name="SearchBySpeciesRadio" Content="Species" GroupName="SearchType" FontSize="12"
-                                                     Margin="0,0,20,0" Checked="SearchRadio_Checked"/>
-                                        <RadioButton x:Name="SearchByHabitatRadio" Content="Habitat" GroupName="SearchType" FontSize="12"
+                                        <RadioButton x:Name="SearchByIdRadio" Content="ID" GroupName="SearchType" 
+                                                     Style="{StaticResource SmallRadioButton}"
+                                                     IsChecked="True" Checked="SearchRadio_Checked"/>
+                                        <RadioButton x:Name="SearchBySpeciesRadio" Content="Species" GroupName="SearchType" 
+                                                     Style="{StaticResource SmallRadioButton}"
                                                      Checked="SearchRadio_Checked"/>
+                                        <RadioButton x:Name="SearchByHabitatRadio" Content="Habitat" GroupName="SearchType" 
+                                                     Style="{StaticResource SmallRadioButton}"
+                                                     Margin="0" Checked="SearchRadio_Checked"/>
                                     </StackPanel>
                                     
                                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                        <RadioButton x:Name="SearchByHealthRadio" Content="Health Status" GroupName="SearchType" FontSize="12"
-                                                     Margin="0,0,20,0" Checked="SearchRadio_Checked"/>
-                                        <RadioButton x:Name="SearchByFedRadio" Content="Fed Status" GroupName="SearchType" FontSize="12"
+                                        <RadioButton x:Name="SearchByHealthRadio" Content="Health Status" GroupName="SearchType" 
+                                                     Style="{StaticResource SmallRadioButton}"
                                                      Checked="SearchRadio_Checked"/>
+                                        <RadioButton x:Name="SearchByFedRadio" Content="Fed Status" GroupName="SearchType" 
+                                                     Style="{StaticResource SmallRadioButton}"
+                                                     Margin="0" Checked="SearchRadio_Checked"/>
                                     </StackPanel>
                                 </Grid>
                                 
                                 <!-- keresési mezők (ezek váltakoznak a radio buttonok alapján) -->
-                                <TextBox x:Name="SearchTextBox" Margin="0,0,0,16" Height="32" FontSize="12" TextChanged="SearchTextBox_TextChanged"/>
-                                <ComboBox x:Name="SearchComboBox" Visibility="Collapsed" Margin="0,0,0,16" Height="32" FontSize="12"
+                                <TextBox x:Name="SearchTextBox" Style="{StaticResource SearchTextBox}" TextChanged="SearchTextBox_TextChanged"/>
+                                <ComboBox x:Name="SearchComboBox" Visibility="Collapsed" Style="{StaticResource SearchComboBox}"
                                           SelectionChanged="SearchComboBox_SelectionChanged"/>
-                                <CheckBox x:Name="SearchFedCheckBox" Content="Show only fed animals" FontSize="12"
-                                          Visibility="Collapsed" Margin="0,0,0,16" 
+                                <CheckBox x:Name="SearchFedCheckBox" Content="Show only fed animals" 
+                                          Style="{StaticResource SearchCheckBox}" Visibility="Collapsed"
                                           Checked="SearchFedCheckBox_Changed" Unchecked="SearchFedCheckBox_Changed"/>
                                 
                                 <!-- rendezési opciók -->
@@ -495,10 +563,10 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
-                                    <TextBlock Text="Sort by:" Style="{StaticResource LabelText}" FontSize="12"
+                                    <TextBlock Text="Sort by:" Style="{StaticResource SmallLabelText}"
                                                VerticalAlignment="Center" Margin="0,0,12,0"/>
-                                    <ComboBox x:Name="SortComboBox" Grid.Column="1" Margin="0,0,8,0" Height="32" FontSize="12"
-                                              SelectionChanged="SortComboBox_SelectionChanged">
+                                    <ComboBox x:Name="SortComboBox" Grid.Column="1" Style="{StaticResource SearchComboBox}"
+                                              Margin="0,0,8,0" SelectionChanged="SortComboBox_SelectionChanged">
                                         <ComboBoxItem Content="ID" IsSelected="True"/>
                                         <ComboBoxItem Content="Species"/>
                                         <ComboBoxItem Content="Habitat"/>
@@ -517,9 +585,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Background="#6B7C4A" CornerRadius="8" Padding="10,6">
-                                        <TextBlock Text="Search Results" Style="{StaticResource SectionTitle}" 
-                                                   FontSize="14" Margin="0" VerticalAlignment="Center" Foreground="White"/>
+                                    <Border Style="{StaticResource SectionHeaderBorder}">
+                                        <TextBlock Text="Search Results" Style="{StaticResource SmallSectionTitleWhite}"
+                                                   VerticalAlignment="Center"/>
                                     </Border>
                                     <!-- export gomb -->
                                     <Button x:Name="ExportButton" Grid.Column="1" Content="Export" 
@@ -542,14 +610,13 @@
                             
                             <!-- jobb oldal: módosítás/törlés -->
                             <StackPanel Grid.Column="2">
-                                <Border Background="#6B7C4A" CornerRadius="8" Padding="10,6" Margin="0,0,0,8">
-                                    <TextBlock Text="Modify / Delete Animal" Style="{StaticResource SectionTitle}" 
-                                               FontSize="14" Margin="0" Foreground="White"/>
+                                <Border Style="{StaticResource SectionHeaderBorder}" Margin="0,0,0,8">
+                                    <TextBlock Text="Modify / Delete Animal" Style="{StaticResource SmallSectionTitleWhite}"/>
                                 </Border>
                                 <TextBlock Text="Select an animal from search results to modify or delete." 
                                            FontStyle="Italic" Foreground="#5A6B42" FontSize="10" Margin="0,0,0,12" TextWrapping="Wrap"/>
                                 
-                                <!-- módosítási űrlap (alapból ki van kapcsolva) -->
+                                <!-- módosítási űrlap (alapból kikapcsolva) -->
                                 <Grid x:Name="ModifyGrid" IsEnabled="False">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -560,20 +627,20 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <!-- ID csak olvasható, mert azt nem szabad módosítani -->
-                                    <StackPanel Margin="0,0,0,8">
-                                        <TextBlock Text="ID (Read-only)" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <TextBox x:Name="ModifyIdTextBox" IsReadOnly="True" Background="#F0F4E8" Height="30" FontSize="12" Margin="0,4,0,0"/>
+                                    <!-- ID -->
+                                    <StackPanel Style="{StaticResource FormInputStackPanel}">
+                                        <TextBlock Text="ID (Read-only)" Style="{StaticResource SmallLabelText}"/>
+                                        <TextBox x:Name="ModifyIdTextBox" IsReadOnly="True" Background="#F0F4E8" Style="{StaticResource SmallTextBox}"/>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="1" Margin="0,0,0,8">
-                                        <TextBlock Text="Name (Species)" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <TextBox x:Name="ModifyNameTextBox" Height="30" FontSize="12" Margin="0,4,0,0"/>
+                                    <StackPanel Grid.Row="1" Style="{StaticResource FormInputStackPanel}">
+                                        <TextBlock Text="Name (Species)" Style="{StaticResource SmallLabelText}"/>
+                                        <TextBox x:Name="ModifyNameTextBox" Style="{StaticResource SmallTextBox}"/>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="2" Margin="0,0,0,8">
-                                        <TextBlock Text="Habitat" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <ComboBox x:Name="ModifyHabitatComboBox" Height="30" FontSize="12" Margin="0,4,0,0">
+                                    <StackPanel Grid.Row="2" Style="{StaticResource FormInputStackPanel}">
+                                        <TextBlock Text="Habitat" Style="{StaticResource SmallLabelText}"/>
+                                        <ComboBox x:Name="ModifyHabitatComboBox" Style="{StaticResource SmallComboBox}">
                                             <ComboBoxItem Content="Savannah"/>
                                             <ComboBoxItem Content="Rainforest"/>
                                             <ComboBoxItem Content="Desert"/>
@@ -584,14 +651,14 @@
                                         </ComboBox>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="3" Margin="0,0,0,8">
-                                        <TextBlock Text="Arrival Date" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <DatePicker x:Name="ModifyArrivalDatePicker" Height="32" FontSize="12" Margin="0,4,0,0"/>
+                                    <StackPanel Grid.Row="3" Style="{StaticResource FormInputStackPanel}">
+                                        <TextBlock Text="Arrival Date" Style="{StaticResource SmallLabelText}"/>
+                                        <DatePicker x:Name="ModifyArrivalDatePicker" Style="{StaticResource SmallDatePicker}"/>
                                     </StackPanel>
 
-                                    <StackPanel Grid.Row="4" Margin="0,0,0,8">
-                                        <TextBlock Text="Health Status" Style="{StaticResource LabelText}" FontSize="12"/>
-                                        <ComboBox x:Name="ModifyHealthStatusComboBox" Height="30" FontSize="12" Margin="0,4,0,0">
+                                    <StackPanel Grid.Row="4" Style="{StaticResource FormInputStackPanel}">
+                                        <TextBlock Text="Health Status" Style="{StaticResource SmallLabelText}"/>
+                                        <ComboBox x:Name="ModifyHealthStatusComboBox" Style="{StaticResource SmallComboBox}">
                                             <ComboBoxItem Content="Excellent"/>
                                             <ComboBoxItem Content="Good"/>
                                             <ComboBoxItem Content="Fair"/>
@@ -600,7 +667,7 @@
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="5" Margin="0,0,0,12">
-                                        <TextBlock Text="Feeding Status" Style="{StaticResource LabelText}" FontSize="12"/>
+                                        <TextBlock Text="Feeding Status" Style="{StaticResource SmallLabelText}"/>
                                         <CheckBox x:Name="ModifyIsFedCheckBox" Content="Is Fed" FontSize="12" Margin="0,6,0,0" Height="26"/>
                                     </StackPanel>
                                 </Grid>
